@@ -108,9 +108,9 @@ class StyleController extends Controller {
         $res = $model->save();
         
         if ($res) {
-            $this->redirect(['index']);
+            $this->redirect(['style/index']);
         } else {
-            $this->redirect(['index']);
+            $this->redirect(['style/index']);
         }
     }
 
