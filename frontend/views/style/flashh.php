@@ -68,13 +68,13 @@ if (isset($frindf) && !empty($frindf)) {
             
 
 
-            <div class="miaodian_mesng miaodiana_b">
+            <div class="miaodian_mesng miaodiana_b miaodiana_show">
                 <div class="sanjiao_box">
                    <div class="maodian_flash maodian_icon"><div class="md_flash_center"></div><div class="md_flash_big"></div></div>
                     <div class="sanjiao"></div>
                     <div class="click_m"></div>
                 </div>
-                <div class="miaodian_text">
+                <div class="miaodian_text">s
                     <span class="text_title">明式家具</span>
                     在中式风格的家具配饰上多以造型凝炼、线条优雅的明式家具为主，而空间也因它们的存在而即刻生出端正清雅之感。
                 </div>

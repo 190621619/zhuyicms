@@ -94,7 +94,7 @@ if (isset($frindf) && !empty($frindf)) {
             </div>
 
 
-            <div class="miaodian_mesng miaodiana_c">
+            <div class="miaodian_mesng miaodiana_c miaodiana_show">
                 <div class="sanjiao_box">
                    <div class="maodian_flash maodian_icon"><div class="md_flash_center"></div><div class="md_flash_big"></div></div>
                     <div class="sanjiao"></div>
