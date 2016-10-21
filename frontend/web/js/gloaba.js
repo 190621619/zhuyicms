@@ -62,9 +62,9 @@ $(function () {
     })
 
     $(".share_btn").on("click", function () {
-        
+
         if ($(".btn_miaodian .sanjiao").css("display") == "none") {
-            tj_ajax(6,6016,"","","分享按钮点击次数");
+            tj_ajax(6, 6016, "", "", "分享按钮点击次数");
             $(".sanjiao,.miaodian_text").fadeOut(200);
             $(".miaodian_mesng").css("z-index", 24);
             $(".btn_miaodian").find(".sanjiao,.miaodian_text").fadeIn(200);
@@ -122,6 +122,10 @@ var isLoad = true; // 控制变量
 // 判断图片加载状况，加载完成后回调
 isImgLoad(function () {
     $(".desib_box").addClass("desib_box_play");
+    setTimeout(function () {
+        $(".miaodiana_show").css("z-index", 1000);
+        $(".miaodiana_show .sanjiao,.miaodiana_show .miaodian_text").fadeIn(200);
+    }, 5000);
     if ($("body").attr("id") == "no_flash") {
         setTimeout(function () {
             $("#getaa").animate({top: "-10%"}, 500);

@@ -148,9 +148,9 @@ body {
 
 .desib_box .miaoshu>span { display: block;}
 .miaoshu .miaoshu_name { font-size: .32rem;white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 8em;}
+                         text-overflow: ellipsis;
+                         overflow: hidden;
+                         width: 8em;}
 .miaoshu .text_big { font-size: .66rem; font-weight: bold; position: relative; z-index: 1001;}
 .logo,.logoaa { position: absolute; z-index: 1002; right: .3rem; top: .3rem; font-size: .88rem; color: #FF4E38; -webkit-font-smoothing: none !important;    -webkit-text-stroke-width: 0px !important;}
 
@@ -177,8 +177,8 @@ body {
          bottom: .3rem;
          left: 50%;
          -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0px;
-    -moz-osx-font-smoothing: none;
+         -webkit-text-stroke-width: 0px;
+         -moz-osx-font-smoothing: none;
          margin-left: -1.1rem;}
 .by_ad::after {
     content: "";
@@ -247,4 +247,3 @@ body {
         font-size: 48px;
     }
 }
-
