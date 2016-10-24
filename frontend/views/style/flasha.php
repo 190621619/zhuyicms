@@ -34,7 +34,9 @@ if (isset($frindf) && !empty($frindf)) {
                     <span>波西米亚风格</span>
                     <div class="miaodian_mesng miaodiana_a">
                         <div class="sanjiao_box">
-                           <div class="maodian_flash maodian_icon"><div class="md_flash_center"></div><div class="md_flash_big"></div></div>
+                           <div class="maodian_flash maodian_icon"><div class="md_flash_center">
+						 	<div class="text_beizhu">波西米亚风格</div>
+						 </div><div class="md_flash_big"></div></div>
 
                             <div class="sanjiao"></div>
                             <div class="click_m"></div>
@@ -69,7 +71,9 @@ if (isset($frindf) && !empty($frindf)) {
 
             <div class="miaodian_mesng miaodiana_aa">
                 <div class="sanjiao_box">
-                   <div class="maodian_flash maodian_icon"><div class="md_flash_center"></div><div class="md_flash_big"></div></div>
+                   <div class="maodian_flash maodian_icon"><div class="md_flash_center">
+						 	<div class="text_beizhu">浓烈色彩</div>
+						 </div><div class="md_flash_big"></div></div>
 
                     <div class="sanjiao"></div>
                     <div class="click_m"></div>
@@ -83,7 +87,9 @@ if (isset($frindf) && !empty($frindf)) {
 
             <div class="miaodian_mesng miaodiana_b">
                 <div class="sanjiao_box">
-                   <div class="maodian_flash maodian_icon"><div class="md_flash_center"></div><div class="md_flash_big"></div></div>
+                   <div class="maodian_flash maodian_icon"><div class="md_flash_center">
+						 	<div class="text_beizhu">异域情调的饰品</div>
+						 </div><div class="md_flash_big"></div></div>
                     <div class="sanjiao"></div>
                     <div class="click_m"></div>
                 </div>
@@ -94,9 +100,11 @@ if (isset($frindf) && !empty($frindf)) {
             </div>
 
 
-            <div class="miaodian_mesng miaodiana_c miaodiana_show">
+            <div class="miaodian_mesng miaodiana_c">
                 <div class="sanjiao_box">
-                   <div class="maodian_flash maodian_icon"><div class="md_flash_center"></div><div class="md_flash_big"></div></div>
+                   <div class="maodian_flash maodian_icon"><div class="md_flash_center">
+						 	<div class="text_beizhu">藤编或木质家具</div>
+						 </div><div class="md_flash_big"></div></div>
                     <div class="sanjiao"></div>
                     <div class="click_m"></div>
                 </div>
@@ -109,7 +117,9 @@ if (isset($frindf) && !empty($frindf)) {
 
             <div class="miaodian_mesng miaodiana_e">
                 <div class="sanjiao_box">
-                   <div class="maodian_flash maodian_icon"><div class="md_flash_center"></div><div class="md_flash_big"></div></div>
+                   <div class="maodian_flash maodian_icon"><div class="md_flash_center">
+						 	<div class="text_beizhu">印花织物</div>
+						 </div><div class="md_flash_big"></div></div>
                     <div class="sanjiao"></div>
                     <div class="click_m"></div>
                 </div>

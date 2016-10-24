@@ -199,6 +199,44 @@ body {
         background: -webkit-gradient(linear, 0 0, 0 8%, from(#dedede), to(white));
         box-sizing: border-box;
 }*/
+
+
+.md_flash_center>.text_beizhu{  
+	position: absolute;
+	z-index: 10;
+    width: 7em;
+    top: -.15rem;
+    font-weight: 100;
+    word-break:keep-all;          
+	white-space:nowrap;   
+    padding: 0rem .1rem .05rem .1rem;
+    font-size: .2rem;
+    background-color:rgba(0,0,0,0.6);
+    margin-left: .35rem;
+    }  
+
+.md_flash_center>.text_beizhu::after{
+	content: "";
+	z-index: 10;
+	 position: absolute;
+	 width: .25rem;
+	 left: 0;
+	 top: .18rem;
+	 margin-left: -.25rem;
+	 height: 1px;
+	 background: #000000;
+}
+.md_flash_center>.text_left{
+	margin-left: 0;
+	right: 0;
+	margin-right: .35rem;
+}
+.md_flash_center>.text_left::after{
+	margin-left: 0;
+	left: inherit;
+	right: 0;
+	margin-right: -.25rem;
+}
 /*适配*/
 
 @media screen and (min-width: 255px) {

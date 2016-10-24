@@ -6,7 +6,10 @@ $(function () {
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-
+$(".text_beizhu").each(function(){
+       var length=$(this).text().length;
+      $(this).css("width",length+"em")
+    });
     $("body").scrollTop(0);
     document.body.addEventListener('touchmove', grrrr, false);
     function grrrr() {
