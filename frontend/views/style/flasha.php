@@ -72,7 +72,7 @@ if (isset($frindf) && !empty($frindf)) {
             <div class="miaodian_mesng miaodiana_aa">
                 <div class="sanjiao_box">
                    <div class="maodian_flash maodian_icon"><div class="md_flash_center">
-						 	<div class="text_beizhu">浓烈色彩</div>
+						 	<div class="text_beizhu text_left">浓烈色彩</div>
 						 </div><div class="md_flash_big"></div></div>
 
                     <div class="sanjiao"></div>
