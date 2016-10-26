@@ -48,7 +48,48 @@ $(".text_beizhu").each(function(){
             $(".sanjiao,.miaodian_text").fadeOut(200);
         }
     });
+    
+    var phone_true=true;
+	$(".phone_btn").on("click",function(){
+		if(true&&$(".phone_btn").hasClass("active")){
+			phone_true=false;
+			var mesga=$("#tel_phone").val();
+		$.ajax({
+		type: "get",
+		data: "",
+		url: "http://zhuyihome.com/index.php?r=style/ajaxuser&mtId="+mesga+"",
+		async: true,
+		success: function(data) {
+			if(data==0){
+				$(".true_box").html("保存失败");
+				$(".true_box").fadeIn(800,function(){
+					$(".true_box").fadeOut(800,function(){
+						phone_true=true;
+					});
+				});
+			}else{
+				$(".true_box").html("保存成功");
+				$(".true_box").fadeIn(800,function(){
+					$(".true_box").fadeOut(800,function(){
+						$("#tel_phone").val("");
+						phone_true=true;
+					});
+				});
+			}
+			
+		}
+	});
+		}
+	});
+	$('#tel_phone').bind('input propertychange', function() {  
+    	  if($(this).val()!=""){
+			$(".phone_btn").addClass("active");
+		}else{
+			$(".phone_btn").removeClass("active");
+		}
+	}); 
 
+    
     $(".click_m").on("click", function () {
         if (time) {
             if ($(this).siblings(".sanjiao").css("display") == "none") {
@@ -100,7 +141,7 @@ $(".text_beizhu").each(function(){
         $(".desib_box").css({"height": get});
         $(".desib_box").css({"margin-top": -(get - height) / 2});
         $(".miaoshu,.logo,.logoaa").css({"margin-top": (get - height) / 2});
-        $(".gloab_bottm").height(height - 2 * heightaa);
+        $(".gloab_bottm").height(height);
         $(".miaodiana_a .sanjiao_box").css("left", big_left + 15);
     }
 });
