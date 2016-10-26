@@ -73,7 +73,7 @@ body {
 .share_box .share_btn { width: 92%; margin-left: 4%; height: .88rem; float: left; line-height: .88rem; background: #FF4E38; color: #FFFFFF; text-align: center;}
 .share_box .cs_more { width: 100%; clear: both; text-align: center;}
 .gloab_bottm { background: #794141;   height: 100%; float: left; width: 100%; position: relative; top: -1px; font-size: .20rem; overflow: hidden; color: #57372e; text-align: center;}
-.gloab_bottm .erweima { width: 30%;margin-top: .56rem;}
+.gloab_bottm .erweima { width: 30%;margin-top: .8rem;}
 .bottm_mesg { line-height: 1.3;
               margin-bottom: 3.2rem;
               margin-top: 0.3rem;
@@ -247,6 +247,24 @@ body {
 	right: 0;
 	margin-right: -.25rem;
 }
+
+
+.tel_phone_box { font-size: .26rem;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    height: 3rem;
+    left: 0;
+    right: 0;
+    margin: auto;}
+.tel_phone_box>input,.tel_phone_box>.phone_btn { font-size: .24rem; width: 92%; margin-left: 4%; height: .88rem; line-height: .88rem; border: none; outline: none;}
+.tel_phone_box>span { color: #FFFFFF; margin-left: 4%;}
+.tel_phone_box>.phone_btn { background: #cccccc; font-size: .26rem; text-align: center; color: #FFFFFF;}
+.tel_phone_box>.active {background: #FF4E38;}
+.tel_phone_box>input { margin: .2rem 4% .6rem 4%; text-indent: .3rem;}
+.tel_phone_box .true_box { display: none; position: fixed; width: 2rem; height: 2rem; line-height: 2rem; top: 0; bottom: 0; z-index: 1999; background: #000000; color: #FFFFFF; opacity: 0.7; text-align: center; left: 0; right: 0; margin: auto;}
 /*适配*/
 
 @media screen and (min-width: 255px) {

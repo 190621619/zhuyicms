@@ -157,6 +157,14 @@ if (isset($frindf) && !empty($frindf)) {
          <div class="gloab_bottm">
             <img class="erweima" src="img/ewm/3.png"  />
             <div class="bottm_mesg">想观看和你风格类似的住艺改造家视频吗？<br>请长按识别二维码进入我们的公众号</div>
+            <div class="tel_phone_box">
+					<span class="tel_title cs_more">如果您有装修需求，请留下您的联系方式</span>
+					<input id="tel_phone"  placeholder="请输入您的手机号或邮箱" />
+					<div class="phone_btn">提交</div>
+					<div class="true_box">
+						提交成功
+					</div>
+				</div>
 
             <span class="by_ad iconfont icon-logo01"></span>
             <div style="font-size: .2rem; font-weight:bold;color:#ff4e38;position: absolute;text-align:center;bottom: 0.3rem;height: .3rem;width: 100%;">找到最懂你的独立设计师</div>
