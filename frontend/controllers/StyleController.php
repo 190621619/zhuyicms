@@ -71,7 +71,33 @@ class StyleController extends Controller {
             }
         }
     }
-    
+    // ajax 保存用户数据
+    public function actionAjaxuser(){
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        $userinfo = $session->get('userInfo');
+        $lianxifs = \Yii::$app->request->get('lianxifs');
+        $uc = new \common\util\Guolu();
+        if(count($userinfo)>0 && $lianxifs){
+            //插入数据库
+            $shareUserModel = new \common\models\ZyShareUser();
+            $shareUserModel->open_id = $userinfo['openid'];
+            $shareUserModel->nick_name = $uc->userTextEncode($userinfo['nickname']);
+            $shareUserModel->city = $userinfo['city'];
+            $shareUserModel->information = $lianxifs;
+            $shareUserModel->create_time = time();
+            $res = $shareUserModel->save();
+            if ($res){
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            return 0;
+        }
+    }
     public function actionChannel(){
         $_mId = 7;
         $_mdId = Yii::$app->request->get('c_num');
