@@ -80,14 +80,14 @@ class StyleController extends Controller {
         $userinfo = $session->get('userInfo');
         $lianxifs = \Yii::$app->request->get('lianxifs');
         $uc = new \common\util\Guolu();
-        if(count($userinfo)>0 && $lianxifs){
+        if($lianxifs){
             //插入数据库
             $shareUserModel = new \common\models\ZyShareUser();
             $shareUserModel->open_id = $userinfo['openid'];
             $shareUserModel->nick_name = $uc->userTextEncode($userinfo['nickname']);
             $shareUserModel->city = $userinfo['city'];
             $shareUserModel->information = $lianxifs;
-            $shareUserModel->create_time = time();
+            $shareUserModel->create_time = (string)time();
             $res = $shareUserModel->save();
             if ($res){
                 return 1;
