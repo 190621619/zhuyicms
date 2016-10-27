@@ -167,7 +167,7 @@ if (isset($frindf) && !empty($frindf)) {
             <div class="tel_phone_box">
 					<span class="tel_title cs_more">如果您有装修需求，请留下您的联系方式</span>
 					<input id="tel_phone"  placeholder="请输入您的手机号或邮箱" />
-					<div class="phone_btn">提交</div>
+                                        <div class="phone_btn" style="background: #EEEEEE;">提交</div>
 					<div class="true_box">
 						提交成功
 					</div>
