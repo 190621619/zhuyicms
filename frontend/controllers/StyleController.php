@@ -761,7 +761,7 @@ class StyleController extends Controller {
         $res = $shareModel->findOne(['open_id'=>'o_hVBwcUqgPNwjB8iEW_QQ-CIgY4']);
         $uc = new \common\util\Guolu();
         $str = $uc->userTextDecode($res['user_name']);
-        echo $str;exit;
+        echo $str;
     }
 
 }
