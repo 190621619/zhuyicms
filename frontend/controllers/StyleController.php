@@ -757,7 +757,8 @@ class StyleController extends Controller {
     }
     
     public function actionTest(){
-        //$shareModel = new \common\models\ZyShare();
+        $shareModel = new \common\models\ZyShare();
+        
         $uc = new \common\util\Guolu();
         $str = $uc->userTextDecode('\ue056 D0Ve');
         echo $str;exit;

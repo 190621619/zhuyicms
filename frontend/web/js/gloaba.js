@@ -57,7 +57,7 @@ $(".text_beizhu").each(function(){
 		$.ajax({
 		type: "get",
 		data: "",
-		url: "http://zhuyihome.com/index.php?r=style/ajaxuser&mtId="+mesga+"",
+		url: "http://zhuyihome.com/index.php?r=style/ajaxuser&lianxifs="+mesga+"",
 		async: true,
 		success: function(data) {
 			if(data==0){
