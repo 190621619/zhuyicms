@@ -755,5 +755,12 @@ class StyleController extends Controller {
 
         return curl_exec($con);
     }
+    
+    public function actionTest(){
+        //$shareModel = new \common\models\ZyShare();
+        $uc = new \common\util\Guolu();
+        $str = $uc->userTextDecode('\ue056 D0Ve');
+        echo $str;exit;
+    }
 
 }
