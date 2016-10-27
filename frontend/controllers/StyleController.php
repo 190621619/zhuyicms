@@ -758,9 +758,9 @@ class StyleController extends Controller {
     
     public function actionTest(){
         $shareModel = new \common\models\ZyShare();
-        
+        $res = $shareModel->findOne(['open_id'=>'o_hVBwcUqgPNwjB8iEW_QQ-CIgY4']);
         $uc = new \common\util\Guolu();
-        $str = $uc->userTextDecode('\ue056 D0Ve');
+        $str = $uc->userTextDecode($res['user_name']);
         echo $str;exit;
     }
 
