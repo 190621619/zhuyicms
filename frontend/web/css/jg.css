@@ -119,7 +119,7 @@ body {
                                             -webkit-animation-fill-mode: forwards !important; left:-.2rem; top:-.2rem;}
 .miaodian_mesng .sanjiao_box { position: relative; left: 23.5%; top:0;}
 .miaodian_mesng .click_m { position: absolute; width: 1rem; z-index: 999; height: 1rem; top: -.5rem; left: -.5rem;}
-.btn_miaodian { top: -5.1rem;}
+.btn_miaodian { top: -2rem;}
 .btn_miaodian  .sanjiao_box  { left: 0;}
 .btn_miaodian .sanjiao {
     margin: 0 auto;
