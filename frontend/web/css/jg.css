@@ -263,7 +263,7 @@ body {
 .tel_phone_box>input,.tel_phone_box>.phone_btn { font-size: .24rem; width: 92%; margin-left: 4%; height: .88rem; line-height: .88rem; border: none; outline: none;}
 .tel_phone_box>span { color: #FFFFFF;display: block; text-align: center;}
 .tel_phone_box>.phone_btn { background: #cccccc; font-size: .26rem; text-align: center; color: #FFFFFF;}
-.tel_phone_box>.active {background: #FF4E38;}
+.tel_phone_box>.active {background: #FF4E38 !important;}
 .tel_phone_box>input { margin: .2rem 4% .6rem 4%; text-indent: .3rem;}
 .tel_phone_box .true_box { display: none; position: fixed; width: 2rem; height: 2rem; line-height: 2rem; top: 0; bottom: 0; z-index: 1999; background: #000000; color: #FFFFFF; opacity: 0.7; text-align: center; left: 0; right: 0; margin: auto;}
 /*适配*/
