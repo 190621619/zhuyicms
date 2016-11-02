@@ -17,11 +17,15 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
         <link rel="stylesheet" href="css/gloab.css" />
         <link rel="stylesheet" href="css/designer_list.css" />
         <link rel="stylesheet"  href="//at.alicdn.com/t/font_1467361951_3606887.css" />
+       
         <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.bxslider.js" ></script>	
         <script type="text/javascript" src="js/touch-0.2.14.min.js" ></script>
         <script type="text/javascript" src="js/gloab.js" ></script>
         <script type="text/javascript" src="js/designer_list.js" ></script>
+        <script src="js/iscroll.js"></script>
+	<script src="js/pullToRefresh.js"></script>	
+        
     </head>
     <body>
         <div class="des_box">
@@ -61,7 +65,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 					</div>
 				</div>
 			</div>
-            <div class="sousuo_box">
+<!--            <div class="sousuo_box">
                 <div class="sousuo_title">
                     设计师类别
                 </div>
@@ -85,8 +89,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 </div>
 
                 <div class="sifting">甄选</div>
-            </div>
-            <div class="designer_box">
+            </div>-->
+            <div class="designer_box" id="wrapper">
+                <ul>
                 <?php
                 foreach ($data as $v) {
                     //获取单个设计师的名字，头像，作品等信息
@@ -110,7 +115,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     }
 
                     $html = <<<HTML
-						<div class="pro_here iconfont">
+						<li><div class="pro_here iconfont">
 							<img class="here_img" src="$background" designer_id="$designerId"/>
 							<div class="here_zhe"></div>
 							<div class="here_botaa"></div>
@@ -126,11 +131,12 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 									{$labelSpan}
 								</div>
 							</div>
-						</div>
+						</div></li>
 HTML;
                     echo $html;
                 }
                 ?>
+                    </ul>
             </div>
                         <div id="jiazai_ing" style=" float: left; display: none; width: 100%;color: #777777; text-align: center; margin: .4rem 0;">正在努力加载中...</div>
         </div>
@@ -138,6 +144,53 @@ HTML;
 </html>
 
 <script type='text/javascript'>
+    refresher.init({
+	id:"wrapper",//<------------------------------------------------------------------------------------┐
+	pullDownAction:Refresh,                                                            
+	pullUpAction:Load 																			
+	});																																							
+function Refresh() {																
+	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+		var el, li, i;																		
+		el =document.querySelector("#wrapper ul");					
+		//这里写你的刷新代码				
+		document.getElementById("wrapper").querySelector(".pullDownIcon").style.display="none";		
+		document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="<img src='css/ok.png'/>刷新成功";																					 
+		setTimeout(function () {
+			wrapper.refresh();
+			document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
+			},1000);//模拟qq下拉刷新显示成功效果
+		/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+	}, 1000);
+}
+
+function Load() {
+            
+                    var length=$(".designer_box ul li").length;
+                    $.ajax({
+                   type: "get",
+                   data: "",
+                   url: "<?php echo Yii::getAlias('@web') . '/index.php?r=designer/list'; ?>" + "&&params=" + length,
+                   async: true,
+                   success: function (data) {
+                        if(data==""||data==null){
+                       $(".pullUpIcon").css("background","none");
+                        $(".pullUpLabel").html("还有更多设计师，想认识他们？请联系住艺");
+                   }else{
+                       data = eval('(' + decodeURI(data) + ')');
+                       jiazai(data);
+                      wrapper.refresh();
+                       var html_box=$(".designer_box ul").html();
+                       localStorage.setItem("zhuyi_local",html_box);
+                   }
+                   }
+               });
+           
+               
+}
+//以上为下拉刷新代码
+    
+    
     touch.on(".sifting", "tap", function (ev) {
         var height = $(window).height();
         var get = "室内设计师,beijing";
@@ -146,72 +199,40 @@ HTML;
             url: "<?php echo Yii::getAlias('@web') . '/index.php?r=designer/list'; ?>" + "&&params=" + get,
             data: "",
             success: function (data) {
-                console.log("筛选设计师...");
-                console.log(data);
                 $(".sousuo_box").animate({marginTop: -height}, 400);
             }
         })
 
     })
     $("body").on("click", ".pro_here", function (ev) {
+        var here_top=$(ev.currentTarget).parent("li").index();
         var designer_id = $(ev.currentTarget).find(">img").attr("designer_id");
         $.ajax({
             type: "GET",
             url: "<?php echo Yii::getAlias('@web') . '/index.php?r=designer/detail'; ?>" + "&&params=" + designer_id,
             data: "",
             success: function (data) {
-                console.log("js output...........");
-                console.log(data);
+                localStorage.setItem("here_top",here_top);
                 window.location.href = "<?php echo Yii::getAlias('@web') . '/index.php?r=designer/detail'; ?>" + "&&params=" + designer_id;
             }
         })
     });
 
     touch.on(".pro_here", "tap", function (ev) {
+    var here_top=$(ev.currentTarget).parent("li").index();
         var designer_id = $(ev.currentTarget).find(">img").attr("designer_id");
         $.ajax({
             type: "GET",
             url: "<?php echo Yii::getAlias('@web') . '/index.php?r=designer/detail'; ?>" + "&&params=" + designer_id,
             data: "",
             success: function (data) {
+                 localStorage.setItem("here_top",here_top);
                 window.location.href = "<?php echo Yii::getAlias('@web') . '/index.php?r=designer/detail'; ?>" + "&&params=" + designer_id;
             }
         })
     });
 
 
-    var truefalse = true;
-    $(window).on("scroll", function () {
-        var height = $(window).height();
-        var scrrol = document.body.scrollTop;
-        var heighta = $(".des_box").height();
-        var get = heighta - height - scrrol;
-
-        console.log(get);
-        if (get <= 0 && truefalse) {
-            truefalse = false;
-            var length = $(".designer_box .pro_here").length;
-            $("#jiazai_ing").show();
-            $.ajax({
-                type: "get",
-                data: "",
-                url: "<?php echo Yii::getAlias('@web') . '/index.php?r=designer/list'; ?>" + "&&params=" + length,
-                async: true,
-                success: function (data) {
-                     if(data==""||data==null){
-                    $("#jiazai_ing").html("还有更多设计师，想认识他们？请联系住艺");
-                           truefalse=false;
-                }
-                    data = eval('(' + decodeURI(data) + ')');
-                    jiazai(data);
-                    truefalse = true;
-                    $("#jiazai_ing").hide();
-                }
-            });
-
-
-        }
-    })
 
     var yyyy = 0
     function jiazai(data) {
@@ -225,7 +246,7 @@ HTML;
                 var html = "<span>" + vtag[b] + "</span>"
                 htmlabb += html;
             }
-            var html = '<div class="pro_here iconfont">'
+            var html = '<li><div class="pro_here iconfont">'
                     + '<img designer_id="' + data[i].designer_id + '" class="here_img" src="' + data[i].background + '" />'
                     + '<div class="here_zhe"></div>'
                     + '<div class="here_botaa"></div>'
@@ -244,8 +265,8 @@ HTML;
 
 
                     + '</div>'
-                    + '</div>'
-            $(".designer_box").append(html);
+                    + '</div></li>'
+            $(".designer_box ul").append(html);
             var widthaa = $(".here_img").width();
             $(".here_img").css("height", widthaa * .56);
             yyyy++;

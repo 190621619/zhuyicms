@@ -32,7 +32,7 @@ class ProjectController extends \common\util\BaseController {
 
             $model = new ZyProject();
             $project = $model->findOne(['user_id' => $user_id]);
-
+            
             //如果有需求就跳转到个人中心
             if ($project) {
                 return $this->redirect(['order/list']);
@@ -77,9 +77,18 @@ class ProjectController extends \common\util\BaseController {
                 //$sms = Yii::$app->Sms;
                 $sms = new Sms();
                 $ret = $sms->send(array('13521932827'), '【住艺】用户[ ' . $userInfo['phone'] . ' ]提交了新需求,需求单号[' . $model->attributes['project_num'] . '],所在地[' . $model->attributes['city'] . '],开工时间[' . $model->attributes['work_time'] . '],需要[' . $fuwu . '],预算[' . $yusuan . '万],请尽快登录后台处理.');
-
+                
+                //保存返回的ID
+                $pid = $model->attributes['project_id'];
+                //发送一条客服消息
+                $messageModel = new \common\models\Message();
+                $data = array('contents' => "用户 [".$user_id."] 提交了新需求", 'project_id'=>$pid);
+                
+                //$type 为0 代表需求
+                $type = 0;
+                $messageModel->createMessage($data, $type);
                 //插入成功返回保存ID
-                return $model->attributes['project_id'];
+                return $pid;
             }
         }
 
@@ -281,6 +290,7 @@ class ProjectController extends \common\util\BaseController {
         $tokenModel = new \app\components\Token();
         // 获取JS签名
         $jsarr = $tokenModel->getSignature();
+        $user_id = '';
         //判断是否有用户
         if ($user_id = $session->get('user_id')) {
             $model = new ZyProject();
@@ -303,6 +313,9 @@ class ProjectController extends \common\util\BaseController {
             if (count($scoreArr) >= 9) {
                 $scoreArr = array_slice($scoreArr, 0, 9);
             }
+            
+//            echo "<pre>";
+//            print_r($scoreArr);exit;
         } else {
             //引入算法类
             $matchModel = new \app\components\Match();
@@ -350,11 +363,18 @@ class ProjectController extends \common\util\BaseController {
                     //跳出本次循环
                     continue;
                 }
+                
+                //只匹配家装
+                if($designerArr[$i]['customer'] == '公装（企业用户）'){
+                    //跳出本次循环
+                    continue;
+                }
 
                 $scoreArr[$i]['did'] = $designerArr[$i]['designer_id'];
                 // $scoreArr[$i]['customer'] = $designerArr[$i]['customer'];
-
-                $score = $matchModel->assigns($project, $designerArr[$i]);
+                
+                // 计算分数
+                $score = $matchModel->assigns($project, $designerArr[$i], $user_id);
                 //匹配设计师计算分数
                 $scoreArr[$i]['score'] = $score;
 

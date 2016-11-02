@@ -34,7 +34,14 @@ class ZyOrder extends \yii\db\ActiveRecord {
     const STATUS_WAITING_CONTRACT = 9;
     const STATUS_SERVICE_END = 10;
     const STATUS_SERVICE_CANCELLED = 11;
+	
+	const TYPE_CUSTOM_CREATED = 0;
+	const TYPE_USER_CREATED = 1;
 
+	static $SERVICE_TYPE_DICT = array(
+		self::TYPE_CUSTOM_CREATED => '客服创建',
+		self::TYPE_USER_CREATED	=> '用户创建'
+	);
     static $ORDER_STATUS_DICT = array(
         self::STATUS_DISABLED => '无效订单',
         self::STATUS_WAITING_DESIGNER_TO_CONFIRM => '待设计师确认',
@@ -58,6 +65,11 @@ class ZyOrder extends \yii\db\ActiveRecord {
         return '{{%zy_order}}';
     }
     
+    public function getZy_user(){
+        return $this->hasOne(\common\models\ZyUser::className(), ['user_id'=>'user_id'])
+;
+    }
+
     public function getZyj_designer_basic(){
         return $this->hasOne(\common\models\ZyjDesignerBasic::className(), ['id'=>'designer_id']);
     }

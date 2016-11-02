@@ -1,4 +1,17 @@
 $(function(){
+      
+        var local_box=localStorage.getItem("zhuyi_local");
+	if(local_box!=""&&local_box!=null){
+		$(".designer_box").html("<ul></ul>");
+		$(".designer_box ul").html(local_box);
+		refresher.init({
+		id:"wrapper",
+		pullDownAction:Refresh,                                                            
+		pullUpAction:Load 																			
+		});
+	}
+             
+        
 	var get=0;
 	var height=$(window).height();
 	var heighta=$(window).height()-$(".header_top").height()

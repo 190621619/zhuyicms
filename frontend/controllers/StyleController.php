@@ -20,6 +20,7 @@ class StyleController extends Controller {
      * @inheritdoc
      */
     public function behaviors() {
+        //error_reporting(E_ALL^E_NOTICE^E_WARNING);
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -30,87 +31,533 @@ class StyleController extends Controller {
         ];
     }
 
-    /**
-     * Lists all Style models.
-     * @return mixed
-     */
     public function actionIndex() {
-        $searchModel = new StyleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionChoicestyle() {
-        
-        if(Yii::$app->request->get('g')){
-            
-            $styleModel = new Style();
-            $styleModel->user_id = 1;
-            $styleModel->choice_style = Yii::$app->request->get('g');
-            $res = $styleModel->save();
-            
-            return $res;
+        //判断是否登陆过
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
         }
+        if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+            // 分享JS接口
+            $tokenModel = new \app\components\Token();
+            // 获取JS签名
+            $jsarr = $tokenModel->getSignature();
+        } else {
+            $jsarr['timestamp'] = '1';
+
+            $jsarr['signature'] = '2';
+        }
+
+
+        // 判断是第一次还是别人的分享
+        $link_id = Yii::$app->request->get('link_id');
+        if (isset($link_id) && !empty($link_id)) {
+            
+        } else {
+            $link_id = 0;
+        }
+
+        // 判断用户是否授权成功
+        if ($userinfo = $session->get('userInfo')) {
+
+            return $this->render('index', ['link_id' => $link_id, 'jsarr' => $jsarr]);
+        } else {
+            //判断是否是微信内登录
+            if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+                return $this->redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx36e36094bd446689&redirect_uri=http://zhuyihome.com/index.php?r=style/shouindex&response_type=code&scope=snsapi_userinfo&state=' . $link_id . '#wechat_redirect');
+            } else {
+                return $this->render('index', ['link_id' => $link_id, 'jsarr' => $jsarr]);
+            }
+        }
+    }
+    // ajax 保存用户数据
+    public function actionAjaxuser(){
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        $userinfo = $session->get('userInfo');
+        $lianxifs = \Yii::$app->request->get('lianxifs');
+        $uc = new \common\util\Guolu();
+        if($lianxifs){
+            //插入数据库
+            $shareUserModel = new \common\models\ZyShareUser();
+            $shareUserModel->open_id = $userinfo['openid'];
+            $shareUserModel->nick_name = $uc->userTextEncode($userinfo['nickname']);
+            $shareUserModel->city = $userinfo['city'];
+            $shareUserModel->information = $lianxifs;
+            $shareUserModel->create_time = (string)time();
+            $res = $shareUserModel->save();
+            if ($res){
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            return 0;
+        }
+    }
+    public function actionChannel(){
+        $_mId = 7;
+        $_mdId = Yii::$app->request->get('c_num');
         
-        return $this->render('choicestyle');
+        //检验主分类
+        $_mainTypeId = $_mId;
+        if (empty($_mainTypeId)) {
+            die('mtId不能为空');
+        }
+        $_mainTypeName = \common\util\DataCount::getMainType($_mainTypeId, 0);
+        if (!$_mainTypeName) {
+            die('主分类不存在');
+        }
+        //检验主分类详情
+        $_mainDetailId = $_mdId;
+        if (empty($_mainDetailId)) {
+            die('mdId不能为空');
+        }
+        $_mainDetailName = \common\util\DataCount::getMainTypeDetail($_mainTypeId, $_mainDetailId, 0);
+        if (!$_mainDetailName) {
+            die('列表项不存在或为空');
+        }
+
+        $model = new \common\models\ZyDataCount();
+        $model->main_type_id = intval($_mainTypeId);
+        $model->main_detail_id = intval($_mainDetailId);
+        $model->main_type_name = $_mainTypeName;
+        $model->main_detail_name = $_mainDetailName;
+        $model->user_id = 0;
+        $model->designer_id = 0;
+        $model->main_mark = '渠道';
+        $model->create_time = strval(time());
+        $model->main_num = 1;
+        $res = $model->save();
+        
+        if ($res) {
+            $this->redirect(['style/index']);
+        } else {
+            $this->redirect(['style/index']);
+        }
     }
 
-    public function actionWechat() {
+    public function actionProblem() {
 
-        return $this->renderPartial('wechat');
-    }
+        //判断是否登陆过
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
 
-    //风格测试
-    public function actionTest() {
-        echo "ok";
-        return $this->render('style_test');
+        if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+            // 分享JS接口
+            $tokenModel = new \app\components\Token();
+            // 获取JS签名
+            $jsarr = $tokenModel->getSignature();
+        } else {
+            $jsarr['timestamp'] = '1';
+
+            $jsarr['signature'] = '2';
+        }
+
+        $link_id = Yii::$app->request->get('link_id');
+        if (isset($link_id) && !empty($link_id)) {
+            
+        } else {
+            $link_id = 0;
+        }
+        // 判断用户是否授权成功
+        if ($userinfo = $session->get('userInfo')) {
+            return $this->render('problem', ['link_id' => $link_id, 'jsarr' => $jsarr]);
+        } else {
+            //判断是否是微信内登录
+            if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+                return $this->redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx36e36094bd446689&redirect_uri=http://zhuyihome.com/index.php?r=style/shouproblem&response_type=code&scope=snsapi_userinfo&state=' . $link_id . '#wechat_redirect');
+            } else {
+                return $this->render('problem', ['link_id' => $link_id, 'jsarr' => $jsarr]);
+            }
+        }
     }
 
     //风格测试报告
     public function actionReport() {
+        $uc = new \common\util\Guolu();
+        // 查看返回的结果
+        $flashid = Yii::$app->request->get('flash');
 
-        //Yii::$app->request->post();
-        $newdata = Yii::$app->request->get('newdata');
-        $style = explode(',', $newdata);
+        $problemData = Yii::$app->request->get('problem');
 
-        $jsonstyle = json_encode($style);
+        // 每个风格所占百分比
+        $machData = Yii::$app->request->get('match');
 
-        $model = new Style();
+        //获取分享ID
+        $link_id = Yii::$app->request->get('link_id');
 
-        $model->user_id = 1;
-        $model->type = $jsonstyle;
-        $v = $model->save();
+        // 风格结果
+        $style = '';
 
-        $num = $style[0] + $style[2] + $style[4];
+        //判断是否登陆过
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
 
-        $styleArr = array(
-            $style[1] => $style[0] / $num * 100,
-            $style[3] => $style[2] / $num * 100,
-            $style[5] => $style[4] / $num * 100,
-        );
-        //echo "<pre>";
-        //print_r($model);
-        return $this->render('report', ['v' => $v]);
-    }
-
-    //风格报告分享
-    public function actionShare() {
-
+        // 分享JS接口
         $tokenModel = new \app\components\Token();
-
         // 获取JS签名
         $jsarr = $tokenModel->getSignature();
 
-        return $this->render('share', ['jsarr' => $jsarr]);
+        //已经登录过
+        if ($userinfo = $session->get('userInfo')) {
+
+            // 如果有ID标示 说明是别人分享的
+            if ($link_id) {
+                // 判断是不是自己查看自己的分享
+                $shareModel = new \common\models\ZyShare();
+                $res = $shareModel->findOne(['link_id' => $link_id]);
+                if (count($res) > 0) {
+                    // 是自己查看自己的
+                    if ($res['open_id'] == $userinfo['openid']) {
+                        $frindstyle = $shareModel->findAll(['source_openid' => $link_id]);
+
+                        //$mystyle = $shareModel->findOne(['link_id' => $link_id]);
+                        return $this->render('mytestdata', ['mystyle' => $res, 'jsarr' => $jsarr, 'frindstyle' => $frindstyle, 'link_id' => $link_id]);
+                    } else {
+                        // 有ID说明朋友在测试
+                        if (isset($flashid) && !empty($flashid)) {
+                            $shareModel = new \common\models\ZyShare();
+                            switch ($flashid) {
+                                case 'a' :
+                                    $style = "波西米亚";
+                                    break;
+                                case 'b' :
+                                    $style = "复古混搭";
+                                    break;
+                                case 'c' :
+                                    $style = "法式古典";
+                                    break;
+                                case 'd' :
+                                    $style = "工业";
+                                    break;
+                                case 'e' :
+                                    $style = "美式";
+                                    break;
+                                case 'f' :
+                                    $style = "和式";
+                                    break;
+                                case 'g' :
+                                    $style = "现代简约";
+                                    break;
+                                default :
+                                    $style = '中式';
+                            }
+                            $shareModel->open_id = $userinfo['openid'];
+                            $shareModel->user_name = $uc->userTextEncode($userinfo['nickname']);
+                            $shareModel->source_openid = $link_id;
+                            $shareModel->headimgurl = $userinfo['headimgurl'];
+                            $shareModel->create_time = (string) time();
+                            $shareModel->unionid = $userinfo['unionid'];
+                            $shareModel->problem_data = $problemData;
+                            $shareModel->style = $style;
+                            $shareModel->link_id = $this->getRandomString();
+
+                            $shareModel->save();
+                            
+                            // 重新查询自己的风格
+                            $res = $shareModel->findOne(['link_id' => $shareModel->link_id]);
+                            
+                            if (isset($problemData) && !empty($problemData)) {
+                                $pipeidu = 1;
+                            } else {
+                                $pipeidu = NULL;
+                            }
+                            switch ($flashid) {
+                                case 'a' :
+                                    return $this->render('flasha', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                                    break;
+                                case 'b' :
+                                    return $this->render('flashb', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                                    break;
+                                case 'c' :
+                                    return $this->render('flashc', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                                    break;
+                                case 'd' :
+                                    return $this->render('flashd', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                                    break;
+                                case 'e' :
+                                    return $this->render('flashe', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                                    break;
+                                case 'f' :
+                                    return $this->render('flashf', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                                    break;
+                                case 'g' :
+                                    return $this->render('flashg', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                                    break;
+                                case 'h' :
+                                    return $this->render('flashh', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                                    break;
+                                default :
+                                    return $this->render('flasha', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                            }
+                        } else {
+
+                            $userinfo = array('nickname' => $uc->userTextDecode($res['user_name']));
+                            switch ($res['style']) {
+                                case '波西米亚':
+                                    //朋友在看你的风格
+                                    return $this->render('flasha', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                                    break;
+                                case '复古混搭':
+                                    //朋友在看你的风格
+                                    return $this->render('flashb', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                                    break;
+                                case '法式古典':
+                                    //朋友在看你的风格
+                                    return $this->render('flashc', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                                    break;
+                                case '工业':
+                                    //朋友在看你的风格
+                                    return $this->render('flashd', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                                    break;
+                                case '美式':
+                                    //朋友在看你的风格
+                                    return $this->render('flashe', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                                    break;
+                                case '和式':
+                                    //朋友在看你的风格
+                                    return $this->render('flashf', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                                    break;
+                                case '现代简约':
+                                    //朋友在看你的风格
+                                    return $this->render('flashg', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                                    break;
+                                case '中式':
+                                    //朋友在看你的风格
+                                    return $this->render('flashh', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                                    break;
+                                default :
+                                    return $this->render('flasha', ['jsarr' => $jsarr, 'mystyle' => $res, 'link_id' => $link_id, 'frindf' => 1, 'userInfo' => $userinfo]);
+                            }
+                        }
+                    }
+                }
+
+                // 没有link_ID分享标示 是第一次做题
+            } else {
+                $shareModel = new \common\models\ZyShare();
+                switch ($flashid) {
+                    case 'a' :
+                        $style = "波西米亚";
+                        break;
+                    case 'b' :
+                        $style = "复古混搭";
+                        break;
+                    case 'c' :
+                        $style = "法式古典";
+                        break;
+                    case 'd' :
+                        $style = "工业";
+                        break;
+                    case 'e' :
+                        $style = "美式";
+                        break;
+                    case 'f' :
+                        $style = "和式";
+                        break;
+                    case 'g' :
+                        $style = "现代简约";
+                        break;
+                    default :
+                        $style = '中式';
+                }
+
+                $shareModel->open_id = $userinfo['openid'];
+                $shareModel->user_name = $uc->userTextEncode($userinfo['nickname']);
+                $shareModel->headimgurl = $userinfo['headimgurl'];
+                $shareModel->create_time = (string) time();
+                $shareModel->unionid = $userinfo['unionid'];
+                $shareModel->problem_data = $problemData;
+                $shareModel->style = $style;
+                $shareModel->link_id = $this->getRandomString();
+                $shareModel->save();
+                if (isset($problemData) && !empty($problemData)) {
+                    $pipeidu = 1;
+                } else {
+                    $pipeidu = NULL;
+                }
+                switch ($flashid) {
+                    case 'a' :
+                        $stylearr = array('style' => '波西米亚');
+                        return $this->render('flasha', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                        break;
+                    case 'b' :
+                        $stylearr = array('style' => '复古混搭');
+                        return $this->render('flashb', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                        break;
+                    case 'c' :
+                        $stylearr = array('style' => '法式古典');
+                        return $this->render('flashc', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                        break;
+                    case 'd' :
+                        $stylearr = array('style' => '工业');
+                        return $this->render('flashd', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                        break;
+                    case 'e' :
+                        $stylearr = array('style' => '美式');
+                        return $this->render('flashe', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                        break;
+                    case 'f' :
+                        $stylearr = array('style' => '和式');
+                        return $this->render('flashf', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                        break;
+                    case 'g' :
+                        $stylearr = array('style' => '现代简约');
+                        return $this->render('flashg', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                        break;
+                    case 'h' :
+                        $stylearr = array('style' => '中式');
+                        return $this->render('flashh', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                        break;
+                    default :
+                        $stylearr = array('style' => '波西米亚');
+                        return $this->render('flasha', ['jsarr' => $jsarr, 'mystyle' => $stylearr, 'link_id' => $shareModel->link_id, 'userInfo' => $userinfo, 'machData' => $machData, 'pipeidu' => $pipeidu]);
+                }
+            }
+        } else {
+            // 没有登录保存变量
+            //判断是否是微信内登录
+            if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+                return $this->redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx36e36094bd446689&redirect_uri=http://zhuyihome.com/index.php?r=style/shoureport&response_type=code&scope=snsapi_userinfo&state=' . $link_id . '#wechat_redirect');
+            } else {
+                $userinfo['nickname'] = '';
+                $jsarr['timestamp'] = '234234234';
+                switch ($flashid) {
+                    case 'a' :
+                        $stylearr = array('style' => '波西米亚');
+                        return $this->render('flasha', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                        break;
+                    case 'b' :
+                        $stylearr = array('style' => '复古混搭');
+                        return $this->render('flashb', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                        break;
+                    case 'c' :
+                        $stylearr = array('style' => '法式古典');
+                        return $this->render('flashc', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                        break;
+                    case 'd' :
+                        $stylearr = array('style' => '工业');
+                        return $this->render('flashd', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                        break;
+                    case 'e' :
+                        $stylearr = array('style' => '美式');
+                        return $this->render('flashe', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                        break;
+                    case 'f' :
+                        $stylearr = array('style' => '和式');
+                        return $this->render('flashf', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                        break;
+                    case 'g' :
+                        $stylearr = array('style' => '现代简约');
+                        return $this->render('flashg', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                        break;
+                    case 'h' :
+                        $stylearr = array('style' => '中式');
+                        return $this->render('flashh', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                        break;
+                    default :
+                        $stylearr = array('style' => '波西米亚');
+                        return $this->render('flasha', ['userInfo' => $userinfo, 'mystyle' => $stylearr, 'jsarr' => $jsarr, 'link_id' => '1233', 'machData' => $machData]);
+                }
+            }
+        }
     }
 
-    //微信授权
-    public function actionShou() {
+    //风格报告分享
+    public function actionChosestyle() {
+
+        // 每个风格所占百分比
+        $machData = Yii::$app->request->get('machData');
+
+        //所属风格
+        $flash = Yii::$app->request->get('flash');
+        //判断是否登陆过
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+
+        if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+            // 分享JS接口
+            $tokenModel = new \app\components\Token();
+            // 获取JS签名
+            $jsarr = $tokenModel->getSignature();
+        } else {
+            $jsarr['timestamp'] = '1';
+
+            $jsarr['signature'] = '2';
+        }
+
+        // 风格匹配数组
+        $styleArr = array();
+        if (isset($machData) && !empty($machData)) {
+            $macharr = explode(',', $machData);
+            array_pop($macharr);
+            foreach ($macharr as $mstyle) {
+                $mstyle = explode('*', $mstyle);
+                $styleArr[$mstyle[0]] = $mstyle[1];
+            }
+        }
+
+        // 判断用户是否授权成功
+        if ($userinfo = $session->get('userInfo')) {
+            return $this->render('chosestyle', ['styleArr' => $styleArr, 'flash' => $flash, 'jsarr' => $jsarr]);
+        } else {
+            //判断是否是微信内登录
+            if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+                return $this->redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx36e36094bd446689&redirect_uri=http://zhuyihome.com/index.php?r=style/Shouchosestyle&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect');
+            } else {
+                return $this->render('chosestyle', ['styleArr' => $styleArr, 'flash' => $flash, 'jsarr' => $jsarr]);
+            }
+        }
+    }
+
+    // 查看朋友的具体测试
+    public function actionFriendstyle() {
+        //判断是否登陆过
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        // 分享JS接口
+        $tokenModel = new \app\components\Token();
+        // 获取JS签名
+        $jsarr = $tokenModel->getSignature();
+        $style = Yii::$app->request->get('style');
+        $link_id = Yii::$app->request->get('link_id');
+        // 判断用户是否授权成功
+        if ($userinfo = $session->get('userInfo')) {
+
+            $shareModel = new \common\models\ZyShare();
+
+            $mystyle = $shareModel->findOne(['link_id' => $link_id]);
+
+            $friendstyle = $shareModel->find()->where(['style' => $style, 'source_openid' => $link_id])->all();
+
+            return $this->render('friendtest', ['friendstyle' => $friendstyle, 'mystyle' => $mystyle, 'style' => $style, 'jsarr' => $jsarr]);
+        } else {
+            //判断是否是微信内登录
+            if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false) {
+                return $this->redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx36e36094bd446689&redirect_uri=http://zhuyihome.com/index.php?r=style/Shoufstyle&response_type=code&scope=snsapi_userinfo&state=' . $link_id . '#wechat_redirect');
+            } else {
+                return $this->render('friendtest');
+            }
+        }
+    }
+
+    //首页微信授权
+    public function actionShouindex() {
         $code = $_GET['code'];
+
+        $link_id = Yii::$app->request->get('state');
 
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx36e36094bd446689&secret=1d8f874eda186deee2c8a81b577fe094&code=" . $code . "&grant_type=authorization_code";
 
@@ -120,81 +567,173 @@ class StyleController extends Controller {
 
         $urlUser = "https://api.weixin.qq.com/sns/userinfo?access_token=" . $res['access_token'] . "&openid=" . $res['openid'] . "";
         $userinfo = $this->doCurlGetRequest($urlUser);
-        echo "<spen style='font-size: 45px; font-weight: 15px;'><pre>";
-        print_r(json_decode($userinfo, TRUE));
-    }
+        $userinfo = json_decode($userinfo, TRUE);
 
-    /**
-     * Displays a single Style model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id) {
-        return $this->render('view', [
-                    'model' => $this->findModel($id),
-        ]);
-    }
+        if (count($userinfo) > 0) {
+            //初始化session
+            $session = Yii::$app->session;
+            if (!$session->isActive) {
+                $session->open();
+            }
 
-    /**
-     * Creates a new Style model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate() {
-        $model = new Style();
+            // 授权登录成功!
+            $session->set('userInfo', $userinfo);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->style_id]);
-        } else {
-            return $this->render('create', [
-                        'model' => $model,
-            ]);
+            $this->redirect(array('style/index', 'link_id' => $link_id));
         }
     }
 
-    /**
-     * Updates an existing Style model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id) {
-        $model = $this->findModel($id);
+    //问题页微信授权
+    public function actionShouproblem() {
+        $code = $_GET['code'];
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->style_id]);
-        } else {
-            return $this->render('update', [
-                        'model' => $model,
-            ]);
+        $link_id = Yii::$app->request->get('state');
+
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx36e36094bd446689&secret=1d8f874eda186deee2c8a81b577fe094&code=" . $code . "&grant_type=authorization_code";
+
+        $res = $this->doCurlGetRequest($url);
+
+        $res = json_decode($res, TRUE);
+
+        $urlUser = "https://api.weixin.qq.com/sns/userinfo?access_token=" . $res['access_token'] . "&openid=" . $res['openid'] . "";
+        $userinfo = $this->doCurlGetRequest($urlUser);
+        $userinfo = json_decode($userinfo, TRUE);
+
+        if (count($userinfo) > 0) {
+            //初始化session
+            $session = Yii::$app->session;
+            if (!$session->isActive) {
+                $session->open();
+            }
+
+            // 授权登录成功!
+            $session->set('userInfo', $userinfo);
+
+            $this->redirect(array('style/problem', 'link_id' => $link_id));
         }
     }
 
-    /**
-     * Deletes an existing Style model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id) {
-        $this->findModel($id)->delete();
+    //结果页微信授权
+    public function actionShoureport() {
+        $code = $_GET['code'];
 
-        return $this->redirect(['index']);
+        $link_id = Yii::$app->request->get('state');
+
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx36e36094bd446689&secret=1d8f874eda186deee2c8a81b577fe094&code=" . $code . "&grant_type=authorization_code";
+
+        $res = $this->doCurlGetRequest($url);
+
+        $res = json_decode($res, TRUE);
+
+        $urlUser = "https://api.weixin.qq.com/sns/userinfo?access_token=" . $res['access_token'] . "&openid=" . $res['openid'] . "";
+        $userinfo = $this->doCurlGetRequest($urlUser);
+        $userinfo = json_decode($userinfo, TRUE);
+
+        if (count($userinfo) > 0) {
+            //初始化session
+            $session = Yii::$app->session;
+            if (!$session->isActive) {
+                $session->open();
+            }
+
+            // 授权登录成功!
+            $session->set('userInfo', $userinfo);
+
+
+            $this->redirect(array('style/report', 'link_id' => $link_id));
+        }
     }
 
-    /**
-     * Finds the Style model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Style the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id) {
-        if (($model = Style::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+    //选择其它风格授权
+    public function actionShouchosestyle() {
+        $code = $_GET['code'];
+
+        //$link_id = Yii::$app->request->get('state');
+
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx36e36094bd446689&secret=1d8f874eda186deee2c8a81b577fe094&code=" . $code . "&grant_type=authorization_code";
+
+        $res = $this->doCurlGetRequest($url);
+
+        $res = json_decode($res, TRUE);
+
+        $urlUser = "https://api.weixin.qq.com/sns/userinfo?access_token=" . $res['access_token'] . "&openid=" . $res['openid'] . "";
+        $userinfo = $this->doCurlGetRequest($urlUser);
+        $userinfo = json_decode($userinfo, TRUE);
+
+        if (count($userinfo) > 0) {
+            //初始化session
+            $session = Yii::$app->session;
+            if (!$session->isActive) {
+                $session->open();
+            }
+
+            // 授权登录成功!
+            $session->set('userInfo', $userinfo);
+
+            $this->redirect(array('style/chosestyle'));
         }
+    }
+
+    //朋友的风格结果授权
+    public function actionShoufstyle() {
+        $code = $_GET['code'];
+
+        $link_id = Yii::$app->request->get('state');
+
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx36e36094bd446689&secret=1d8f874eda186deee2c8a81b577fe094&code=" . $code . "&grant_type=authorization_code";
+
+        $res = $this->doCurlGetRequest($url);
+
+        $res = json_decode($res, TRUE);
+
+        $urlUser = "https://api.weixin.qq.com/sns/userinfo?access_token=" . $res['access_token'] . "&openid=" . $res['openid'] . "";
+        $userinfo = $this->doCurlGetRequest($urlUser);
+        $userinfo = json_decode($userinfo, TRUE);
+
+        if (count($userinfo) > 0) {
+            //初始化session
+            $session = Yii::$app->session;
+            if (!$session->isActive) {
+                $session->open();
+            }
+
+            // 授权登录成功!
+            $session->set('userInfo', $userinfo);
+
+            $this->redirect(array('style/report', 'link_id' => $link_id));
+        }
+    }
+
+    public function getRandomString($len = 6, $type = '3') {
+        if ($type == '1') {
+            $str = '0123456789';
+        } elseif ($type == '2') {
+            $str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxzy';
+        } elseif ($type == '3') {
+            $str = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxzy';
+        }
+        $n = $len;
+        $len = strlen($str) - 1;
+        $s = '';
+        for ($i = 0; $i < $n; $i ++) {
+            $s .= $str [rand(0, $len)];
+        }
+
+        $num = $s . $this->createProNum();
+        return $num;
+    }
+
+    public function createProNum() {
+        $arr = range(1, 10);
+
+        shuffle($arr);
+        $phonestr = '';
+        foreach ($arr as $values) {
+            $phonestr = $phonestr . $values;
+        }
+        $phonestr = substr($phonestr, 3, 4);
+        $phonestr = substr(time(), -2) . $phonestr;
+        return $phonestr;
     }
 
     private function doCurlGetRequest($url, $data = array(), $timeout = 10) {
@@ -215,6 +754,14 @@ class StyleController extends Controller {
         curl_setopt($con, CURLOPT_SSL_VERIFYHOST, 0); // 检查证书中是否设置域名（为0也可以，就是连域名存在与否都不验证了）
 
         return curl_exec($con);
+    }
+    
+    public function actionTest(){
+        $shareModel = new \common\models\ZyShare();
+        $res = $shareModel->findOne(['open_id'=>'o_hVBwcUqgPNwjB8iEW_QQ-CIgY4']);
+        $uc = new \common\util\Guolu();
+        $str = $uc->userTextDecode($res['user_name']);
+        echo $str;
     }
 
 }

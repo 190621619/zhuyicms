@@ -7,23 +7,80 @@ use bacend\models;
 use yii\web\UploadedFile;
 use yii;
 
-class DesignerController extends controller {
+class DesignerController extends Controller {
 
     public function actionIndex() {
 
-        $designerlistModel = new \backend\models\DesignerBasic();
-        $search_word = '';
-        if (Yii::$app->request->post('table_search')) {
-            $search_word = Yii::$app->request->post('table_search');
-            $designer = $designerlistModel::findBySql("select * from zyj_designer_basic where name like '%" . $search_word . "%'");
-        } else {
-            $designer = $designerlistModel::find();
+        $designerlistModel = \backend\models\DesignerBasic::find();
+        $designerlistModel->joinWith(['zyj_designer_additional', 'zyj_designer_work']);
+
+        $w = $this->_getDesignerCondition();
+
+        $designerlistModel->where($w)->orderBy(' zyj_designer_basic.id desc ');
+
+        $pagination = new \yii\data\Pagination(['totalCount' => $designerlistModel->count('zyj_designer_basic.id'), 'pageSize' => 10]);
+
+        $data = $designerlistModel->offset($pagination->offset)->limit($pagination->limit)->all();
+
+        return $this->render("index", [
+                    'data' => $data,
+                    'pagination' => $pagination,
+                    'model' => $designerlistModel,
+                    'getParams' => Yii::$app->request->get()
+        ]);
+    }
+
+    /**
+     * 私有条件搜索拼接方法
+     * @author 郝帅卫 <shuaiwei.hao@condenast.net>
+     * @date 2016-09-13
+     * @param null
+     * @return string
+     */
+    private function _getDesignerCondition() {
+        $_params = Yii::$app->request->get();
+        if (empty($_params)) {
+            return '1';
         }
-        $pagination = new \yii\data\Pagination(['totalCount' => $designer->count(), 'pageSize' => 10]);
+        foreach ($_params as $k => $v) {
+            $_params[$k] = addslashes($v);
+        }
+        unset($_params['page']);
+        unset($_params['per-page']);
+        if (empty($_params)) {
+            return '1';
+        }
+        $w = '1';
+        if ($_params['ds_id']) {
+            $w .= ' and zyj_designer_basic.id="' . $_params['ds_id'] . '" ';
+        }
+        if ($_params['ds_sjf_dx']) {
+            $w .= ' and zyj_designer_work.charge>="' . $_params['ds_sjf_dx'] . '" ';
+        }
+        if ($_params['ds_sjf_sx']) {
+            $w .= ' and zyj_designer_work.charge<="' . $_params['ds_sjf_sx'] . '" ';
+        }
+        if ($_params['ds_city']) {
+            $w .= ' and zyj_designer_work.service_city="' . $_params['ds_city'] . '" ';
+        }
+        if ($_params['ds_name']) {
+            $w .= ' and zyj_designer_basic.name like "%' . $_params['ds_name'] . '%" ';
+        }
+        if ($_params['ds_style']) {
+            $w .= ' and zyj_designer_work.style like "%' . $_params['ds_style'] . '%" ';
+        }
+        if ($_params['ds_zxf_dx']) {
+            $w .= ' and zyj_designer_work.charge_work>="' . $_params['ds_zxf_dx'] . '" ';
+        }
+        if ($_params['ds_zxf_sx']) {
+            $w .= ' and zyj_designer_work.charge_work<="' . $_params['ds_zxf_sx'] . '" ';
+        }
+        if ($_params['ds_sex'] != '') {
+            $w .= ' and zyj_designer_basic.sex = "' . $_params['ds_sex'] . '" ';
+        }
 
-        $data = $designer->offset($pagination->offset)->limit($pagination->limit)->all();
 
-        return $this->render("index", ['data' => $data, 'pagination' => $pagination, 'model' => $designerlistModel, 'search_word' => $search_word]);
+        return $w;
     }
 
     public function actionDetail($id) {
@@ -39,7 +96,7 @@ class DesignerController extends controller {
 
         return $this->render('detail', ['model' => $designerbasicModel, 'modeladditional' => $designerAdditionalModel, 'modelwork' => $designerWorkModel, 'did' => $id]);
     }
-    
+
     //设计师编辑
     public function actionEdit($id) {
         error_reporting(E_ALL & ~E_NOTICE);
@@ -59,7 +116,25 @@ class DesignerController extends controller {
                     //判断model
                     $designerbasicModel = new \backend\models\DesignerBasic();
                     $designerbasicModel = $designerbasicModel::findOne($id);
-                    $designerbasicModel->load(Yii::$app->request->post());
+
+                    //$designerbasicModel->load(Yii::$app->request->post());
+                    $_img_head = Yii::$app->request->post('here_imga');
+                    $_img_bakcground = Yii::$app->request->post('here_imgb');
+
+                    $_saveData = Yii::$app->request->post();
+
+                    unset($_saveData['here_imga']);
+                    unset($_saveData['here_imgb']);
+                    if (!empty($_img_head)) {
+                        $_saveData['DesignerBasic']['image_id'] = $this->_saveImage($_img_head);
+                    }
+                    if (!empty($_img_bakcground)) {
+                        $_saveData['DesignerBasic']['head_imgid'] = $this->_saveImage($_img_bakcground);
+                    }
+                    foreach ($_saveData['DesignerBasic'] as $k => $v) {
+                        $designerbasicModel->$k = $v;
+                    }
+
                     if ($designerbasicModel->save()) {
                         return '修改成功!';
                     } else {
@@ -223,7 +298,23 @@ class DesignerController extends controller {
                 //判断model
                 $designerbasicModel = new \backend\models\DesignerBasic();
 
-                $designerbasicModel->load(Yii::$app->request->post());
+                $_img_head = Yii::$app->request->post('here_imga');
+                if (empty($_img_head)) {
+                    return json_encode(['msg' => '请上传头像']);
+                }
+                $_img_bakcground = Yii::$app->request->post('here_imgb');
+                if (empty($_img_bakcground)) {
+                    return json_encode(['msg' => '请上传背景图']);
+                }
+                $_saveData = Yii::$app->request->post();
+                unset($_saveData['here_imga']);
+                unset($_saveData['here_imgb']);
+                $_saveData['DesignerBasic']['image_id'] = $this->_saveImage($_img_head);
+                $_saveData['DesignerBasic']['head_imgid'] = $this->_saveImage($_img_bakcground);
+
+                foreach ($_saveData['DesignerBasic'] as $k => $v) {
+                    $designerbasicModel->$k = $v;
+                }
 
                 if ($designerbasicModel->save()) {
 
@@ -280,6 +371,72 @@ class DesignerController extends controller {
 
             return $this->render('add', ['model' => $designerBasicModel, 'modelwork' => $designerWorkModel, 'modeladditional' => $designerAdditionalModel]);
         }
+    }
+
+    /**
+     * 保存到图片数据表，产生图片ID
+     * @author 郝帅卫 <shuaiwei.hao@condenast.com.cn>
+     * @date 2016-09-13
+     * @param string $_imgUrl
+     * @return string
+     */
+    private function _saveImage($_imgUrl) {
+        $imageModel = new \common\models\ZyImages();
+        $imageModel->url = $_imgUrl;
+        $imageId = '';
+        if ($imageModel->save()) {
+            return $imageModel->image_id;
+        } else {
+            return '';
+        }
+    }
+
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
+
+    public function actionUploadImage() {
+        if (empty($_FILES)) {
+            echo json_encode(['code' => 101, 'msg' => '没有要上传的文件']);
+            exit();
+        }
+
+        $_strFile = '';
+        foreach ($_FILES as $k => $v) {
+            $_strFile = $k;
+            break;
+        }
+
+        $_fileType = strtolower($_FILES[$_strFile]["type"]);
+
+        if (( $_fileType == "image/gif") || ($_fileType == "image/jpeg") || ($_fileType == "image/pjpeg") || ($_fileType == "image/png")) {
+            if ($_FILES[$_strFile]["error"] > 0) {
+                
+            } else {
+                $dir = Yii::getAlias("@frontend") . "/web/uploads/" . date("Ymd");
+                if (!is_dir($dir))
+                    mkdir($dir, 0777, true);
+
+
+                $_endFileExt = pathinfo($_FILES[$_strFile]['name']);
+
+                $_rnd = \common\controllers\BaseController::getRandomString();
+                $fileName = date("HiiHsHis") . $_rnd . "." . $_endFileExt['extension'];
+
+                $dirimg = $dir . "/" . $fileName;
+
+                $res = move_uploaded_file($_FILES[$_strFile]["tmp_name"], $dirimg);
+                if ($res) {
+                    echo json_encode(['code' => 1, 'msg' => '/uploads/' . date("Ymd") . '/' . $fileName]);
+                } else {
+                    echo json_encode(['code' => 102, 'msg' => '保存文件失败']);
+                }
+            }
+        } else {
+            echo json_encode(['code' => 101, 'msg' => '文件类型错误']);
+        }
+        exit();
     }
 
     public function actionDelete($id) {
@@ -364,7 +521,7 @@ class DesignerController extends controller {
                         return false;
                     }
                     $ret->head_imgid = $imageId;
-                    if($ret->save()){
+                    if ($ret->save()) {
                         Yii::$app->getSession()->setFlash('success', '保存成功');
                         Yii::$app->getSession()->setFlash('imgurl', $uploadSuccessPath);
                     }

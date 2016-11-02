@@ -6,6 +6,7 @@ body{ padding-top: 0;}
 .bot_btn_box .next_btn,.bot_btn_box .tj_btn { background: #C9C9CA;}
  .tj_btn a { display: block; color: #FFFFFF !important;}
 .true_btn .next_btn,.true_btn .tj_btn {background: #FF4E38 !important;}
+.true_btn .next_btn:hover,.true_btn .tj_btn:hover {background: #ca4133 !important;}
 .first_btn>span { display: none; }
 .first_btn .next_btn { display: block; width: 100%; height: 100%; text-align: center; line-height: .88rem;}
 .center_btn .next_btn,.center_btn .prev_btn {float: left; width: 47.62%; text-align: center; height: .88rem; line-height: .88rem;}
@@ -67,6 +68,7 @@ body{ padding-top: 0;}
 .seven_spd {  position: absolute; width: 100%; left: 0; text-align: center; bottom: .3rem;}
 .boxa_box { width: 2.8rem; height: 1.3rem; margin: 0 auto ; border: 1px solid #777777; color: #C9C9CA;}
 .first_box>.boxa_box  { color: #777777;margin-bottom: .8rem;}
+.first_box>.boxa_box:hover { color: #ff4e38; border-color: #ff4e38;}
 .boxa_box>span { display: block; text-align: center;}
 .boxa_box .box_soa{ font-size: .28rem; margin: .25rem auto .2rem;}
 .boxa_box .box_sob{ font-size: .20rem;}
@@ -76,3 +78,5 @@ body{ padding-top: 0;}
 .first_box { position: absolute; width: 100%; height: 100%; left: 0; top: 0; background: #FFFFFF; z-index: 88;}
 .first_box .activeaa { border: 1px solid #FF4E38; color: #FF4E38;}
 .six_box { margin-top: .4rem;}
+.after_input { position: relative;}
+.after_input i{ position: absolute; right: .3rem; top: 0; color: #777777;}

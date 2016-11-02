@@ -150,6 +150,7 @@ class DesignerController extends Controller {
             $tag = "艺术家,设计小达人";
         }
         $experience = isset($rows->experience) ? $rows->experience : '';
+		$interests = isset($rows->interests)? $rows->interests : '';
         $tmp = $dbModel->getHeadPortrait($designerId);
         $headPortrait = isset($tmp) ? $tmp : "/img/home_page/banner_head.jpg";
 
@@ -207,7 +208,8 @@ class DesignerController extends Controller {
             ),
             'serve_city' => $serveCity,
             'style' => $style,
-            'experience' => $experience
+            'experience' => $experience,
+			'interests' => $interests
         );
         return $this->render("detail", ['data' => $data, 'jsarr' => $jsarr]);
     }
@@ -248,7 +250,7 @@ class DesignerController extends Controller {
             return false;
         }
         $params = $request->get('params');
-        var_dump($params);
+        //var_dump($params);
 
         $designerId = $params;
 
@@ -392,13 +394,79 @@ class DesignerController extends Controller {
                 $designer = $designerM::findBySql("select * from zyj_designer_basic where name like '%" . $searchKey . "%'")->all();
 
                 if (count($designer) > 0) {
+
+                    //判断用户是否登录
+                    $session = Yii::$app->session;
+                    if (!$session->isActive) {
+                        $session->open();
+                    }
+                    $userId = $session->get("user_id");
+
+                    if (!isset($userId) || empty($userId)) {
+
+                        $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
+
+                        if ($_cookieSts) {
+                            //如果是登录用户
+                            $userId = $session->get("user_id");
+
+                            //插入用户的搜索信息
+                            $userModel = new \frontend\models\User();
+                            $userinfo = $userModel->findOne($userId);
+
+                            $userHistory = new \common\models\ZyHistory();
+
+                            $userHistory->user_id = $userId;
+                            $userHistory->user_name = $userinfo['nickname'];
+                            $userHistory->content = $searchKey;
+                            $userHistory->phone = $userinfo['phone'];
+                            $userHistory->create_time = strval(time());
+                            $userHistory->save();
+                        }else{
+                            //没有登录正常返回
+                        }
+                    } else {
+                        //插入用户的搜索信息
+                        $userModel = new \frontend\models\User();
+                        $userinfo = $userModel->findOne($userId);
+
+                        $userHistory = new \common\models\ZyHistory();
+
+                        $userHistory->user_id = $userId;
+                        $userHistory->user_name = $userinfo['nickname'];
+                        $userHistory->content = $searchKey;
+                        $userHistory->phone = $userinfo['phone'];
+                        $userHistory->create_time = (string) time();
+                        $userHistory->save();
+                    }
                     return $this->render('searchdesigner', ['data' => $designer]);
                 } else {
                     return FALSE;
                 }
             }
         } else {
-            return $this->render('hunt');
+            //读取搜索历史
+            //判断用户是否登录
+            $session = Yii::$app->session;
+            if (!$session->isActive) {
+                $session->open();
+            }
+            $userId = $session->get("user_id");
+            if (!isset($userId) || empty($userId)) {
+                $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
+                if ($_cookieSts) {
+                    $userId = $session->get("user_id");
+                } else {
+                    $userId = '';
+                }
+            }
+            //根据用户ID查询历史搜索 按时间降序排列取3条
+            $historyModel = new \common\models\ZyHistory();
+            $historyArr = $historyModel->find()->where(['user_id' => $userId])->orderBy('create_time DESC')->limit(3)->all();
+            if (!$historyArr) {
+                $historyArr = array();
+            }
+            return $this->render('hunt', ['history' => $historyArr]);
         }
     }
 

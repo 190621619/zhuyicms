@@ -70,7 +70,7 @@ $userId = $session->get("user_id");
                     <div class="out_true_top" style="line-height: .3rem; padding-top: .3rem; margin-left: .3rem; margin-right: .3rem; line-height: .35rem; height:1.8rem; border-bottom: none;">您将跳转到客服聊天界面，请输入您的姓名和手机号、以及想约见的设计师姓名，住艺客服会协商设计师的时间</div>
                     <div class="out_true_bott" style="border-top: 1px solid #eeefef;">
                         <span class="quxiao" style="color: #9F9FA0;" onclick="quxiao()">取消</span>
-                        <a href="https://www.sobot.com/chat/oldh5/index.html?sysNum=d816da1bbc6b4814a0929661a3c7dfbc" style="font-size: .24rem; color: #ff4e38; display: block; text-align: center;">继续</a >
+                        <a onclick=bot_for("http://www.sobot.com/chat/h5/index.html?sysNum=d816da1bbc6b4814a0929661a3c7dfbc") style="font-size: .24rem; color: #ff4e38; display: block; text-align: center;">继续</a >
                     </div>
                 </div>
             </div>
@@ -89,6 +89,7 @@ $userId = $session->get("user_id");
             </section>
             <span class="banner_head"><img src="<?= $data['head_portrait'] ?>"/></span>
             <section class="production">
+                <input type="hidden" id="art_len" value=<?php echo $data['art_cnt'] ?>>
                 <div class="pro_title">
                     <span class="titl_span">作品集
                         <a></a>
@@ -193,6 +194,7 @@ HTML;
                     $serveCity = $data['serve_city'];
                     $style = $data['style'];
                     $experience = $data['experience'];
+					$interests = $data['interests'];
                     $yingType = $data['service_content']['ying_type'];
                     $gongType = $data['service_content']['gong_type'];
                     $ruanType = $data['service_content']['ruan_type'];
@@ -246,6 +248,16 @@ HTML;
                                     <?php echo $experience ?>
                                 </div>
                             </div><!--info_here end-->
+                            <?php if(!empty($interests)): ?>
+                            <div class="info_here">
+                                <div class="info_here_left">
+                                    兴趣爱好
+                                </div>
+                                <div class="info_here_right cccc">
+                                    <?php echo $interests ?>
+                                </div>
+                            </div><!--info_here end-->
+                            <?php endif;?>
 
                         </div>
 
@@ -275,7 +287,7 @@ HTML;
                     <?php if (Yii::$app->request->get('checkdesiger') == 1) { ?>
                         <span class="botbb" id="chose_des"><a>选择该设计师</a></span>
                     <?php } else { ?>
-                        <span class="botb"><a>立即约见</a></span>
+                        <span class="botb zy_btn_ux"><a>约见咨询</a></span>
                     <?php } ?>
 
                 </div>
@@ -388,10 +400,19 @@ HTML;
                 }
                 ;
                 $(function () {
+                    function getUrlParam(name) {
+                        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+                        if (r != null)
+                            return unescape(r[2]);
+                        return null; //返回参数值
+                    }
 
+                    var collect_status = getUrlParam("collect_status");
+                    designer_id = getUrlParam("params");
 
                     touch.on("#chose_des", "tap", function () {
-
+                        tj_ajax(4, 4001, user_id, "designer_id", "选择该设计师");
                         var ckshejishi = $("#chose_val").val();
                         window.location.href = "<?php echo Yii::getAlias('@web') . '/index.php?r=project/choose_designer'; ?>" + '&ckshejishi=' + ckshejishi;
                     });
@@ -440,8 +461,7 @@ HTML;
                                     url: "<?php echo Yii::getAlias('@web') . '/index.php?r=my/collect'; ?>" + "&&params=" + params,
                                     data: "",
                                     success: function (data) {
-                                        console.log("js output...........2222222222222");
-                                        console.log(data);
+
                                     }
                                 })
 
@@ -482,4 +502,8 @@ HTML;
                         $(ev.currentTarget).html(htmllll);
                     });
                 });
+                function bot_for(a) {
+                    tj_ajax(2, 2006, user_id, "", "人工匹配按钮");
+                    window.location.href = a;
+                }
 </script>

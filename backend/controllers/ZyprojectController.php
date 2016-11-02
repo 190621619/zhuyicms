@@ -47,9 +47,9 @@ class ZyprojectController extends Controller {
 
         $w = $this->_getZyProjectIndexSearch();
 
-        $query->where($w);
+        $query->where($w)->orderBy(' zy_project.project_id desc ');
 
-        $pages = new \yii\data\Pagination(['totalCount' => $query->count(), 'pageSize' => '15']);
+        $pages = new \yii\data\Pagination(['totalCount' => $query->count('zy_project.project_id'), 'pageSize' => '15']);
 
         $model = $query->offset($pages->offset)->limit($pages->limit)->all();
 
@@ -175,6 +175,9 @@ class ZyprojectController extends Controller {
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->project_id]);
         } else {
+            if($model->use_area=='undefined'){
+                $model->use_area = '';
+            }
             return $this->render('update', [
                         'model' => $model,
             ]);
@@ -224,8 +227,8 @@ class ZyprojectController extends Controller {
     //查看匹配设计师
     public function actionMatchjson($id) {
         $model = $this->findModel($id);
-        
-        return $this->render('matchjson',['model'=>$model]);
+        $pagination = new \yii\data\Pagination(['totalCount' => 10, 'pageSize' => 3]);
+        return $this->render('matchjson',['model'=>$model,'pagination'=>$pagination]);
     }
 
 }

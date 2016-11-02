@@ -70,10 +70,12 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             <div class="submit_boxa">
                 <span class="submit_true">提交成功！住艺已经收到你的需求！</span>
                 <span class="submit_truea">需求可随时在【我的住艺】中继续填写</span>
+                <span class="center_nameaa"><a class="" onclick=shaohou("index.php?r=project/choose_designer&&project_id=<?= $project_id ?>")>稍后再填</a></span>
                 <?php
                 $form = ActiveForm::begin([
                             'method' => 'post',
-                            'options' => ['enctype' => 'multipart/form-data'],
+                            'options' => ['enctype' => 'multipart/form-data', 'class'=>'sub_form'],
+                           
                 ]);
                 ?>
                 <span class="here_a" style=" float: left; width: 100%; margin-bottom: .3rem;">请告诉我们更多信息,以便住艺为你匹配更适合的设计师</span>
@@ -125,16 +127,32 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     </div>
                 </div>
                 <textarea class="text_box"  name="description" id="answer-for-q-3" rows="10" placeholder="更多个性化需求，在这里告诉住艺吧！"></textarea>
-                <button class="chose_btn zhihui" type="submit" disabled="true"  style="border: none;">
+                <button class="chose_btn zhihui" type="button" disabled="true"  style="border: none;">
                     完成！立刻查看设计师！
                 </button>
                 <?php ActiveForm::end(); ?>
-                <span class="center_nameaa"><a style="color: #221814;" href="index.php?r=project/choose_designer&&project_id=<?= $project_id ?>">稍后再填</a></span>
+                
             </div>
         </div>	
     </body>
 </html>
 <script type="text/javascript">
+    $(function(){
+       tj_ajax(3,3001, user_id, "", "细节需求页面加载量"); 
+    })
+    
+    function shaohou(a){
+        tj_ajax(2,2002, user_id, "", "稍后再填");
+        window.location.href=a;
+    }
+    touch.on(".chose_btn","tap",function(ev){
+        if($(ev.currentTarget).attr("disabled")){
+            return false;
+        }else{
+             tj_ajax(2,2001, user_id, "", "提交");
+             $("form").submit();
+        }
+    });
     var _uploadUrl = "<?php echo Url::to(['index/upload-image']); ?>";
 
     function ajaxFileUpload(fileName) {
