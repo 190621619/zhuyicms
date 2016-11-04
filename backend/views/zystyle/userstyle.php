@@ -2,7 +2,7 @@
 $this->params['breadcrumbs'][] = '测试风格用户信息';
 ?>
 <h2>
-    风格分享管理
+    风格测试用户信息
     <small>Preview</small>
 </h2>
 <div class="row">
