@@ -27,5 +27,21 @@ class ZystyleController extends Controller {
 
        // return $this->render('index', ['styleList' => $res]);
     }
+    
+    public function actionUserstyle(){
+         $styleModel = new \common\models\ZyShareUser();
+        $res = $styleModel->find()->orderBy('create_time desc');
+
+        $pagination = new \yii\data\Pagination(['totalCount' => $res->count(), 'pageSize' => 10]);
+
+        $data = $res->offset($pagination->offset)->limit($pagination->limit)->all();
+
+        return $this->render("userstyle", [
+            'styleList' => $data,
+            'pagination' => $pagination,
+            'model' => $res,
+            'getParams' => Yii::$app->request->get()
+        ]);
+    }
 
 }
