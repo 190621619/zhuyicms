@@ -36,7 +36,7 @@ use dosamigos\datepicker\DatePicker;
                         foreach ($allRes[$k] as $ak => $av) {
                             ?>
                             <div class="col-lg-4">
-                                <img class="img-thumbnail" src="http://v1.zhuyi.com/<?php echo $av['img_url']; ?>" data-holder-rendered="true" style="width: 140px; height: 140px;">
+                                <img class="img-thumbnail" src="http://zhuyihome.com/<?php echo $av['img_url']; ?>" data-holder-rendered="true" style="width: 140px; height: 140px;">
                                 <div class="box-tools del" _v="<?php echo $av['id']; ?>">
                                     <i class="fa fa-times"></i>
                                 </div>
