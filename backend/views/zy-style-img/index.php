@@ -69,7 +69,7 @@ use dosamigos\datepicker\DatePicker;
                     alert(data.msg);
                 } else {
                     $('#imgHtml' + sId).append('<div class="col-lg-4">' +
-                            '<img class="img-thumbnail" src="http://v1.zhuyi.com/' + data.msg.imgurl + '" data-holder-rendered="true" style="width: 140px; height: 140px;">' +
+                            '<img class="img-thumbnail" src="http://zhuyihome.com/' + data.msg.imgurl + '" data-holder-rendered="true" style="width: 140px; height: 140px;">' +
                             '<div class="box-tools del" _v="' + data.msg.id + '">' +
                             '<i class="fa fa-times"></i>' +
                             '</div>' +
