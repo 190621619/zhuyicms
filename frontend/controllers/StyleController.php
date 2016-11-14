@@ -756,12 +756,27 @@ class StyleController extends Controller {
         return curl_exec($con);
     }
     
-    public function actionTest(){
+    public function actionTest1(){
         $shareModel = new \common\models\ZyShare();
         $res = $shareModel->findOne(['open_id'=>'o_hVBwcUqgPNwjB8iEW_QQ-CIgY4']);
         $uc = new \common\util\Guolu();
         $str = $uc->userTextDecode($res['user_name']);
         echo $str;
+    }
+    
+    public function actionTest(){
+        
+        return $this->render('test');
+    }
+    
+    public function actionLike(){
+        $style_json = $link_id = Yii::$app->request->get('style');
+        $styleArr = json_encode($style_json,TRUE);
+        
+        //调取风格的图片
+        
+        
+        return $this->render('like');
     }
 
 }
