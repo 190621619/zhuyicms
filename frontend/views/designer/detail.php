@@ -99,7 +99,8 @@ $userId = $session->get("user_id");
                     <?php
                     //此设计师没有作品。
                     if ($data['art_cnt'] == 0 || empty($data['artsets'])) {
-                        ;
+                        // 收藏设计师的默认值
+                        $collectStatus = 2;
                     } else {
                         $userId = $data['user_id'];
                         $designerId = $data['designer_id'];
