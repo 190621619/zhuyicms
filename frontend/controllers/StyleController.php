@@ -771,10 +771,18 @@ class StyleController extends Controller {
     
     public function actionLike(){
         $style_json = $link_id = Yii::$app->request->get('style');
-        $styleArr = json_encode($style_json,TRUE);
+       // $styleArr = json_encode($style_json,TRUE);
+        $styleArr = explode('$', $style_json);
         
+        $styleIDarr = array();
         //调取风格的图片
+        foreach ($styleArr as $v){
+            $varr = explode(',', $v);
+            $styleIDarr = $varr['1'];
+        }
         
+        echo "<pre>";
+        print_r($styleIDarr);exit;
         
         return $this->render('like');
     }

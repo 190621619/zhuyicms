@@ -102,7 +102,7 @@ for(index in result){
 	} 
 	console.log(newstr);
         
-	window.location.href='http://zhuyihome.com/index.php?r=style/like?style='+newstr+'';
+	window.location.href='http://zhuyihome.com/index.php?r=style/like&style='+newstr+'';
 	
 
 }
