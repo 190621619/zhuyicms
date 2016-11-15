@@ -54,6 +54,14 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 			<div class="banner_bottom"></div>
 			</div>
                 <div class="like_box">
+                    <?php foreach ($styleArr as $v){
+     foreach ($v as $img){
+         
+         echo ' <div class="like_here" newstr="'.$img['style_id'].'">
+                        <img src="'.$img['img_url'].'"  />
+                    </div>';
+     }
+                    }    ?>
                     <div class="like_here" newstr="2">
                         <img src="img/style_like/ad_a.jpg"  />
                     </div>
