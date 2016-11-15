@@ -784,14 +784,14 @@ class StyleController extends Controller {
             $varr = explode(',', $v);
             //$styleIDarr[] = $varr['1'];
             $res = \common\util\StyleExt::getRndStyleImage($varr['1']);
-            
+
             $stya = array();
-            
-            for($i=0;$i<count($res);$i++){
+
+            for ($i = 0; $i < count($res); $i++) {
                 $stya[$i]['img_url'] = $res[$i]['img_url'];
                 $stya[$i]['style_id'] = $varr['1'];
             }
-       
+
             $styleIDarr[] = $stya;
         }
 
@@ -799,18 +799,30 @@ class StyleController extends Controller {
 //        print_r($styleIDarr);
 //        exit;
 
-        return $this->render('like',['styleArr'=>$styleIDarr]);
+        return $this->render('like', ['styleArr' => $styleIDarr]);
     }
-    
-    public function actionAdd(){
-         //Yii::$app->response->format=Response::FORMAT_JSON;
-        $data = Yii::$app->request->get('style_report');
+
+    public function actionAdd() {
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+
+        if ($user_id = $session->get('user_id')) {
+            $data = Yii::$app->request->get('style_report');
+            $styleModel = new \common\models\ZyStyle();
+            $styleModel->user_id = $user_id;
+            $styleModel->style_json = $data;
+            $styleModel->create_time = time();
+        } else {
+            return $this->redirect(['user/login']);
+        }
+
         return $data;
-        
     }
-    
-    public function actionReportb(){
-        
+
+    public function actionReportb() {
+
         return $this->render('reportb');
     }
 
