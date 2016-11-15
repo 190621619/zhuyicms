@@ -774,6 +774,8 @@ class StyleController extends Controller {
        // $styleArr = json_encode($style_json,TRUE);
         $styleArr = explode('$', $style_json);
         array_filter($styleArr);
+         echo "<pre>";
+        print_r($styleArr);exit;
         $styleIDarr = array();
         //调取风格的图片
         foreach ($styleArr as $v){
