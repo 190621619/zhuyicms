@@ -773,7 +773,7 @@ class StyleController extends Controller {
         $style_json = $link_id = Yii::$app->request->get('style');
        // $styleArr = json_encode($style_json,TRUE);
         $styleArr = explode('$', $style_json);
-        array_filter($styleArr);
+        $styleArr = array_filter($styleArr);
          echo "<pre>";
         print_r($styleArr);exit;
         $styleIDarr = array();
