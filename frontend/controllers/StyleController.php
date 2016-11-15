@@ -773,7 +773,7 @@ class StyleController extends Controller {
         $style_json = $link_id = Yii::$app->request->get('style');
        // $styleArr = json_encode($style_json,TRUE);
         $styleArr = explode('$', $style_json);
-        
+        array_filter($styleArr);
         $styleIDarr = array();
         //调取风格的图片
         foreach ($styleArr as $v){
