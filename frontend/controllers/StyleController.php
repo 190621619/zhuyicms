@@ -788,8 +788,8 @@ class StyleController extends Controller {
             $stya = array();
             foreach ($res as $img) {
 
-                $stya['img_url'] = $img['img_url'];
-                $stya['style_id'] = $varr['1'];
+                $stya[]['img_url'] = $img['img_url'];
+                $stya[]['style_id'] = $varr['1'];
                 
             }
             $styleIDarr[] = $stya;
