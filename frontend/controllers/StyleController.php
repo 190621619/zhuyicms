@@ -787,7 +787,9 @@ class StyleController extends Controller {
 
             foreach ($res as $img) {
 
-                $styleIDarr[$varr['1']] = $img['img_url'];
+                $styleIDarr[]['img_url'] = $img['img_url'];
+                $styleIDarr[]['style_id'] = $varr['1'];
+                
             }
             // $styleIDarr[]
         }
