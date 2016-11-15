@@ -782,12 +782,12 @@ class StyleController extends Controller {
         //调取风格的图片
         foreach ($styleArr as $v) {
             $varr = explode(',', $v);
-            $styleIDarr[] = $varr['1'];
+            //$styleIDarr[] = $varr['1'];
             $res = \common\util\StyleExt::getRndStyleImage($varr['1']);
 
             foreach ($res as $img) {
 
-                $styleIDarr[] = $img['img_url'];
+                $styleIDarr[$varr['1']] = $img['img_url'];
             }
             // $styleIDarr[]
         }
