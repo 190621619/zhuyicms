@@ -784,14 +784,15 @@ class StyleController extends Controller {
             $varr = explode(',', $v);
             //$styleIDarr[] = $varr['1'];
             $res = \common\util\StyleExt::getRndStyleImage($varr['1']);
-
+            
+            $stya = array();
             foreach ($res as $img) {
 
-                $styleIDarr[]['img_url'] = $img['img_url'];
-                $styleIDarr[]['style_id'] = $varr['1'];
+                $stya['img_url'] = $img['img_url'];
+                $stya['style_id'] = $varr['1'];
                 
             }
-            // $styleIDarr[]
+            $styleIDarr[] = $stya;
         }
 
         echo "<pre>";
