@@ -71,6 +71,7 @@ $(function () {
             data: "",
             async: true,
             success: function (data) {
+                alert(data);
                 window.location.href = 'http://zhuyihome.com/index.php?r=style/reportb&get_str='+url_str;
             }
         });

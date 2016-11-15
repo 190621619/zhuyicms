@@ -805,6 +805,7 @@ class StyleController extends Controller {
     public function actionAdd(){
          //Yii::$app->response->format=Response::FORMAT_JSON;
         $data = Yii::$app->request->get('style_report');
+        return $data;
         
     }
     
