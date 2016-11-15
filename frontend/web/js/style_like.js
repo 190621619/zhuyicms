@@ -1,5 +1,5 @@
 $(function(){
-	var new_str=getUrlParam("baseline_id");
+	var new_str=getUrlParam("style");
 	var new_json=[];
 	console.log(new_str);
 	new_str=new_str.split("$");
