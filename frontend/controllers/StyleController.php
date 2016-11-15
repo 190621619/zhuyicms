@@ -782,7 +782,7 @@ class StyleController extends Controller {
             $varr = explode(',', $v);
             $styleIDarr[] = $varr['1'];
             $res = \common\util\StyleExt::getRndStyleImage($varr['1']);
-           $styleIDarr[] = $res;
+           $styleIDarr[] = $res['img_url'];
            // $styleIDarr[]
         }
         
