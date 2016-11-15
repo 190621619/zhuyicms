@@ -801,5 +801,16 @@ class StyleController extends Controller {
 
         return $this->render('like',['styleArr'=>$styleIDarr]);
     }
+    
+    public function actionAdd(){
+         Yii::$app->response->format=Response::FORMAT_JSON;
+        $data = Yii::$app->request->post();
+        return $data;
+    }
+    
+    public function actionReportb(){
+        
+        return $this->render('reportb');
+    }
 
 }
