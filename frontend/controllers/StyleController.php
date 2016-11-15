@@ -786,12 +786,12 @@ class StyleController extends Controller {
             $res = \common\util\StyleExt::getRndStyleImage($varr['1']);
             
             $stya = array();
-            foreach ($res as $img) {
-
-                $stya[$varr['1']]['img_url'] = $img['img_url'];
-                $stya[$varr['1']]['style_id'] = $varr['1'];
-                
+            
+            for($i=0;$i<count($res);$i++){
+                $stya[$i]['img_url'] = $img['img_url'];
+                $stya[$i]['style_id'] = $varr['1'];
             }
+       
             $styleIDarr[] = $stya;
         }
 
