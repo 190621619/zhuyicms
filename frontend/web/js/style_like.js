@@ -63,7 +63,7 @@ $(function () {
         new_json.sort(sortBy('number', false, parseInt));
         new_json = new_json.slice(0, 3);
         for(var i=0;i<new_json.length;i++){
-            url_str+=new_json[i][style]+","+new_json[i][number]+"$";
+            url_str+=new_json[i]["style"]+","+new_json[i]["number"]+"$";
         }
         $.ajax({
             url: "http://zhuyihome.com/index.php?r=style/add&style_report="+url_str,
