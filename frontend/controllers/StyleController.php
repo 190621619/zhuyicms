@@ -814,11 +814,14 @@ class StyleController extends Controller {
             $styleModel->user_id = $user_id;
             $styleModel->style_json = $data;
             $styleModel->create_time = time();
+            $res = $styleModel->save();
+            if($res){
+                return 1;
+            }
         } else {
-            return $this->redirect(['user/login']);
+            return 0;
+            //return $this->redirect(['user/login']);
         }
-
-        return $data;
     }
 
     public function actionReportb() {

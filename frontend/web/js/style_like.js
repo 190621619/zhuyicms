@@ -59,20 +59,22 @@ $(function () {
         }
     });
     touch.on(".btnnnn", "tap", function () {
-        var url_str="";
+        var url_str = "";
         new_json.sort(sortBy('number', false, parseInt));
         new_json = new_json.slice(0, 3);
-        for(var i=0;i<new_json.length;i++){
-            url_str+=new_json[i]["style"]+","+new_json[i]["number"]+"$";
+        for (var i = 0; i < new_json.length; i++) {
+            url_str += new_json[i]["style"] + "," + new_json[i]["number"] + "$";
         }
         $.ajax({
-            url: "http://zhuyihome.com/index.php?r=style/add&style_report="+url_str,
+            url: "http://zhuyihome.com/index.php?r=style/add&style_report=" + url_str,
             type: "GET",
             data: "",
             async: true,
             success: function (data) {
                 alert(data);
-                window.location.href = 'http://zhuyihome.com/index.php?r=style/reportb&get_str='+url_str;
+                if (data) {
+                    window.location.href = 'http://zhuyihome.com/index.php?r=style/reportb&get_str=' + url_str;
+                }
             }
         });
     });
