@@ -813,7 +813,7 @@ class StyleController extends Controller {
             $styleModel = new \common\models\ZyStyle();
             $styleModel->user_id = $user_id;
             $styleModel->style_json = (string)$data;
-            //$styleModel->create_time = time();
+            $styleModel->create_time = date('Y-m-d H:i:s');
             $res = $styleModel->save();
             if($res){
                 return 1;
