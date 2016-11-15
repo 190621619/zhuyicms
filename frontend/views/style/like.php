@@ -49,7 +49,10 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             </section>
             <div class="down_right_zd"></div>
             <div class="like_box">
-                <div class="like_title">你最喜欢以下哪一种风格</div>
+               <div class="banner">
+				<div class="like_title">你最喜欢以下哪一种风格</div>
+			<div class="banner_bottom"></div>
+			</div>
                 <div class="like_box">
                     <div class="like_here" newstr="2">
                         <img src="img/style_like/ad_a.jpg"  />

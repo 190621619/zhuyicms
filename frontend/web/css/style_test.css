@@ -1,7 +1,7 @@
 .style_text_boxs { max-width: 500px; margin:0 auto; font-size: .24rem; position: absolute; left: 0; right: 0;}
 .style_box { padding-top: .4rem; }
 .style_box .style_here { display: none; float: left; width: 100%;}
-.style_here>div,#chose_style>div { float: left; width: 100%; overflow: hidden; position: relative;}
+.style_here>div,#chose_style>div { min-height: 3rem; float: left; width: 100%; overflow: hidden; position: relative;}
 .style_here>div img,#chose_style>div img { min-height: 2rem; float: left; width: 100%; }
 .style_box>.active { display: block; }
 .style_here img,#chose_style img{ width: 100%;}
