@@ -59,7 +59,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                         foreach ($v as $img) {
                             ?>
 
-                            <div class="like_here" newstr="<?= $img['style_id'] ?>">
+                            <div class="like_here" new_str="<?= $img['style_id'] ?>">
                                 <img src="<?= $img['img_url'] ?>"  />
                             </div>
                             <?php
