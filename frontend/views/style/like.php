@@ -36,7 +36,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     <li><a href="<?php echo Url::toRoute('/order/list'); ?>">我的住艺</a></li>
                     <li><a href="<?php echo Url::toRoute('/user/feedback'); ?>">更多建议</a></li>
                     <li>   <?php if ($session->get('user_id')) { ?>
-                        <a abc="<?php echo Url::toRoute('/user/loginout'); ?>">暂时登出</a>
+                            <a abc="<?php echo Url::toRoute('/user/loginout'); ?>">暂时登出</a>
 
                         <?php } else { ?>
 
@@ -49,64 +49,24 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             </section>
             <div class="down_right_zd"></div>
             <div class="like_box">
-               <div class="banner">
-				<div class="like_title">你最喜欢以下哪一种风格</div>
-			<div class="banner_bottom"></div>
-			</div>
+                <div class="banner">
+                    <div class="like_title">你最喜欢以下哪一种风格</div>
+                    <div class="banner_bottom"></div>
+                </div>
                 <div class="like_box">
-                    <?php foreach ($styleArr as $v){
-     foreach ($v as $img){
-         
-         echo ' <div class="like_here" newstr="'.$img['style_id'].'">
-                        <img src="'.$img['img_url'].'"  />
-                    </div>';
-     }
-                    }    ?>
-                    <div class="like_here" newstr="2">
-                        <img src="img/style_like/ad_a.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_b.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_c.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_d.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_b.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_c.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_a.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_b.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_c.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_a.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_b.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_c.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_a.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_b.jpg"  />
-                    </div>
-                    <div class="like_here">
-                        <img src="img/style_like/ad_c.jpg"  />
-                    </div>
+                    <?php
+                    foreach ($styleArr as $v) {
+                        foreach ($v as $img) {
+                            ?>
+
+                            <div class="like_here" newstr="<?= $img['style_id'] ?>">
+                                <img src="<?= $img['img_url'] ?>"  />
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
+
                 </div>
 
             </div>
