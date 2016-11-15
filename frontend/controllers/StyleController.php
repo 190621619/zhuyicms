@@ -799,7 +799,7 @@ class StyleController extends Controller {
         print_r($styleIDarr);
         exit;
 
-        return $this->render(['like','styleArr'=>$styleIDarr]);
+        return $this->render('like',['styleArr'=>$styleIDarr]);
     }
 
 }
