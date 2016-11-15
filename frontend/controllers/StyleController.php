@@ -812,8 +812,8 @@ class StyleController extends Controller {
             $data = Yii::$app->request->get('style_report');
             $styleModel = new \common\models\ZyStyle();
             $styleModel->user_id = $user_id;
-            $styleModel->style_json = $data;
-            $styleModel->create_time = time();
+            $styleModel->style_json = (string)$data;
+            //$styleModel->create_time = time();
             $res = $styleModel->save();
             if($res){
                 return 1;
