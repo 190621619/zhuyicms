@@ -780,7 +780,7 @@ class StyleController extends Controller {
         //调取风格的图片
         foreach ($styleArr as $v){
             $varr = explode(',', $v);
-            $styleIDarr = $varr['1'];
+            $styleIDarr[] = $varr['1'];
         }
         
         echo "<pre>";
