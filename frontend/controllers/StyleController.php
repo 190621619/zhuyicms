@@ -835,6 +835,7 @@ class StyleController extends Controller {
             //$res = $styleModel->findOne(['user_id'=>$user_id])->orderBy('create_time DESC');
             return "8,20$1,10$10,5$";
         }
+        return 1;
     }
 
     public function actionReportb() {
