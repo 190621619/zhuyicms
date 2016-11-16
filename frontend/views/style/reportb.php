@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+$uc = new util\Guolu();
 
 $session = Yii::$app->session;
 if (!$session->isActive) {
@@ -55,8 +56,21 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     </li>
                 </ul>
             </section>
+            <?php 
+            $username = '';
+            if (isset($user['nickname']) && !empty($user['nickname'])) {
+                $username = $user['nickname'];
+                $username =  $uc->userTextDecode($username);
+              
+                
+            } else {
+                $username = $user['phone'];
+
+                $username = substr_replace($username, '****', 3, 4);
+            }
+            ?>
             <div class="down_right_zd"></div> 
-            <span class="report_center center_name">Hi KIVEN</span>
+            <span class="report_center center_name">Hi <?=$username ?></span>
             <span class="report_center">你的风格</span>
             <div class="ratio_box">
                 <div class="chart">

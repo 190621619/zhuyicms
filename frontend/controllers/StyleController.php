@@ -812,10 +812,10 @@ class StyleController extends Controller {
             $data = Yii::$app->request->get('style_report');
             $styleModel = new \common\models\ZyStyle();
             $styleModel->user_id = $user_id;
-            $styleModel->style_json = (string)$data;
+            $styleModel->style_json = (string) $data;
             $styleModel->create_time = date('Y-m-d H:i:s');
             $res = $styleModel->save();
-            if($res){
+            if ($res) {
                 return 1;
             }
         } else {
@@ -823,8 +823,8 @@ class StyleController extends Controller {
             //return $this->redirect(['user/login']);
         }
     }
-    
-    public function actionMystyle(){
+
+    public function actionMystyle() {
         $session = Yii::$app->session;
         if (!$session->isActive) {
             $session->open();
@@ -832,15 +832,30 @@ class StyleController extends Controller {
         if ($user_id = $session->get('user_id')) {
             // 查询风格
             $styleModel = new \common\models\ZyStyle();
-            $res = $styleModel->find()->where(['user_id'=>2])->orderBy('create_time DESC')->limit(1)->all();
-            return $res[0]['style_json'];
+            $res = $styleModel->find()->where(['user_id' => 2])->orderBy('create_time DESC')->limit(1)->all();
+            if ($res) {
+                return $res[0]['style_json'];
+            } else {
+                return 0;
+            }
         }
-       // return 1;
+        return 0;
     }
 
     public function actionReportb() {
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        if ($user_id = $session->get('user_id')) {
+            $userModel = new frontend\models\User();
+            $user = $userModel->findOne($userId);
+        } else {
+            return $this->redirect(['user/login']);
+        }
 
-        return $this->render('reportb');
+
+        return $this->render('reportb', ['user' => $user]);
     }
 
 }
