@@ -184,7 +184,7 @@ switch ($button) {
                 //分享到朋友圈
                 wx.onMenuShareTimeline({
                     title: '居风格是什么', // 分享标题
-                    link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/report&link_id=' + "<?= $link_id ?>", // 分享链接
+                    link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/report&link_id=' + "<?php ?>", // 分享链接
 
                     imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '<?php ?>', // 分享图标
 
