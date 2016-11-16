@@ -634,8 +634,8 @@ HTML;
                 if(indexaa==3 && report==7){
                     $.ajax({
                     type: "GET",
-                    url: "",
-                    data: "http://zhuyihome.com/index.php?r=style/mystyle",
+                    url: "http://zhuyihome.com/index.php?r=style/mystyle",
+                    data: "",
                     success: function (data) {
                         alert(data);
                         var tmm='<div class="report_box">'
