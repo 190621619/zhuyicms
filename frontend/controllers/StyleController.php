@@ -876,6 +876,10 @@ class StyleController extends Controller {
                 //没有需求也没有订单
                 $button = 3;
             }
+            // 判断是否是分享的
+            if ($isshare = Yii::$app->request->get('isshare')) {
+                return $this->render('reportb', ['ukname' => $ukname, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
+            }
             return $this->render('reportb', ['user' => $user, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
         } else {
             $ukname = Yii::$app->request->get('ukname');

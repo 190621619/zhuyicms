@@ -167,7 +167,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 wx.onMenuShareAppMessage({
                     title: '并向你扔了一枚牛头', // 分享标题
                     desc: '看看你对「家」的态度,如果你和我的测试结果相同,两人都将有机会得到HAY的七巧板拼盘一套。', // 分享描述
-                    link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/reportb&get_str=' + "<?= $get_str ?>" + '&ukname=' + "<?= $username ?>", // 分享链接
+                    link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/reportb&get_str=' + "<?= $get_str ?>" + '&ukname=' + "<?= $username ?>" + '&isshare=1', // 分享链接
 
                     imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '<?php ?>', // 分享图标
                     type: '', // 分享类型,music、video或link，不填默认为link
