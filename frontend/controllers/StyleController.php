@@ -832,8 +832,8 @@ class StyleController extends Controller {
         if ($user_id = $session->get('user_id')) {
             // 查询风格
             $styleModel = new \common\models\ZyStyle();
-            //$res = $styleModel->findOne(['user_id'=>$user_id])->orderBy('create_time DESC');
-            return "8,20$1,10$10,5$";
+            $res = $styleModel->findOne(['user_id'=>$user_id])->orderBy('create_time DESC');
+            return $res->style_json;
         }
         return 1;
     }
