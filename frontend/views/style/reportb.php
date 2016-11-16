@@ -22,6 +22,13 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
         <script type="text/javascript" src="js/gloab.js" ></script>
         <script type="text/javascript" src="js/jquery.easy-pie-chart.js" ></script>
         <script type="text/javascript" src="js/style_report.js" ></script>
+        <script>
+        $(function () {
+    var get_url = getUrlParam("get_str");
+    gethahah(get_url);
+   
+})
+        </script>
     </head>
     <body>
         <div class="report_box">
@@ -54,37 +61,34 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             <div class="ratio_box">
                 <div class="chart">
                     <div class="percentage-light" data-percent="45"><span>45</span>%</div>
-                    <div class="label"><a href="#maodiana">现代简约</a></div>
+                    <div class="label"><a href="#maodiana"></a></div>
                 </div>
                 <div class="chart">
                     <div class="percentage-light" data-percent="35"><span>35</span>%</div>
-                    <div class="label"><a href="#maodianb">北欧风情</a></div>
+                    <div class="label"><a href="#maodianb"></a></div>
                 </div>
                 <div class="chart">
                     <div class="percentage-light" data-percent="20"><span>20</span>%</div>
-                    <div class="label"><a href="#maodianc">中式风格</a></div>
+                    <div class="label"><a href="#maodianc"></a></div>
                 </div>
             </div>
             <div class="report_big">
                 <div class="report_here" id="maodiana">
-                    <span class="re_here_title">北欧风情</span>
+                    <span class="re_here_title"></span>
                     <img src="img/home_page/1.jpg" />
                     <div class="report_mesg">
-                        对于家的定义你是个典型的实用主义分子。兴起于20世纪二、三十年代的现代派风格，会让你收货更多家的灵感。冗赘的装饰花线让你觉得多余。
                     </div>
                 </div>
                 <div class="report_here" id="maodianb">
-                    <span class="re_here_title">北欧风情</span>
+                    <span class="re_here_title"></span>
                     <img src="img/home_page/1.jpg" />
                     <div class="report_mesg">
-                        对于家的定义你是个典型的实用主义分子。兴起于20世纪二、三十年代的现代派风格，会让你收货更多家的灵感。冗赘的装饰花线让你觉得多余。
                     </div>
                 </div>
                 <div class="report_here"  id="maodianc">
-                    <span class="re_here_title">北欧风情</span>
+                    <span class="re_here_title"></span>
                     <img src="img/home_page/1.jpg" />
                     <div class="report_mesg">
-                        对于家的定义你是个典型的实用主义分子。兴起于20世纪二、三十年代的现代派风格，会让你收货更多家的灵感。冗赘的装饰花线让你觉得多余。
                     </div>
                 </div>
             </div>

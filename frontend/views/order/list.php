@@ -32,10 +32,13 @@ $userId = $session->get("user_id");
         <script src="js/time/mobiscroll_003.js" type="text/javascript"></script>
         <script src="js/time/mobiscroll_005.js" type="text/javascript"></script>
         <link href="css/time/mobiscroll_003.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="js/jquery.easy-pie-chart.js" ></script>
         <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
         <script type="text/javascript" src="js/touch-0.2.14.min.js" ></script>
         <script type="text/javascript" src="js/gloab.js" ></script>
         <script type="text/javascript" src="js/user.js" ></script>
+        <script type="text/javascript" src="js/style_report.js" ></script>
+        
 
     </head>
 
@@ -125,6 +128,7 @@ $userId = $session->get("user_id");
                     <span class="active">订单</span>
                     <span>需求</span>
                     <span>收藏</span>
+                    <span>我的风格</span>
                 </div>	
                 <ul class="bxslidera" id="nav_box">
                     <li>
@@ -504,6 +508,11 @@ HTML;
                             </div>
                         </div>
                     </li>
+                    <li class="new_report">
+                        <div class="loading_box">
+                                <img src="img/loading.gif"  />
+                            </div>
+                    </li>
                 </ul>
 
             </section>
@@ -525,6 +534,7 @@ HTML;
         var indexaa;
         var index = 7;
         var xiuqiu = 8;
+        var report=7;
         var urll = getUrlParam("tiaozhuanP");
         if (urll == "xiuqiu") {
             indexaa = 1;
@@ -621,6 +631,32 @@ HTML;
 
             }
 
+                if(indexaa==3 && report==7){
+                    $.ajax({
+                    type: "GET",
+                    url: "",
+                    data: "",
+                    success: function (data) {
+                        var tmm='<div class="report_box">'
+            +'<span class="report_center center_name">Hi KIVEN</span><span class="report_center">你的风格</span>'
+           +'<div class="ratio_box"><div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div>'
+                 +'<div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div>'
+                +'<div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div></div>'
+            +'<div class="report_big">'
+               +'<div class="report_here"  id="maodianc"><span class="re_here_title"></span><img src="img/home_page/1.jpg" /><div class="report_mesg"></div></div>'
+                +'<div class="report_here"  id="maodianc"><span class="re_here_title"></span><img src="img/home_page/1.jpg" /><div class="report_mesg"></div></div>'
+                +'<div class="report_here"  id="maodianc"><span class="re_here_title"></span><img src="img/home_page/1.jpg" /><div class="report_mesg"></div></div>'
+            +'</div><a href="demand_problem.html"><div class="tj_btn">提交需求</div></a></div>'
+                        $(".new_report").html(tmm);
+                        data="8,20$1,10$10,5$";
+                        gethahah(data);
+                        var heightttt = $(".bxslidera li:eq(" + indexaa + ")").height();
+                         $(".bxslidera").height(heightttt);
+                         report++;
+                         
+                    }
+                })
+                }
             });
                     $(".nac_boxa>span:eq(" + indexaa + ")").addClass("active").siblings().removeClass("active");
             var heightttt = $(".bxslidera li:eq(" + indexaa + ")").height();
