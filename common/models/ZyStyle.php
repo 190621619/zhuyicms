@@ -46,13 +46,4 @@ class ZyStyle extends \yii\db\ActiveRecord
             'create_time' => '测试时间',
         ];
     }
-
-    /**
-     * @inheritdoc
-     * @return ZyStyleQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new ZyStyleQuery(get_called_class());
-    }
 }
