@@ -32,16 +32,16 @@ function gethahah(url_data) {
         $(this).find(".label a").html(report[index][0]);
     });
 
-    $('.percentage-light').easyPieChart({
-        barColor: '#ff4e38',
-        trackColor: '#eeefef',
-        scaleColor: '#ffffef',
-        scaleColor: false,
-                size: size,
-        lineCap: 'butt',
-        lineWidth: 4,
-        animate: 1000
-    });
+//    $('.percentage-light').easyPieChart({
+//        barColor: '#ff4e38',
+//        trackColor: '#eeefef',
+//        scaleColor: '#ffffef',
+//        scaleColor: false,
+//                size: size,
+//        lineCap: 'butt',
+//        lineWidth: 4,
+//        animate: 1000
+//    });
 
     $(".report_big .report_here").each(function (index, arr) {
         $(this).find(".re_here_title").html(report[index][0]);
