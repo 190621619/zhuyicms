@@ -843,7 +843,7 @@ class StyleController extends Controller {
     }
 
     public function actionReportb() {
-        
+
         $data = Yii::$app->request->get('get_str');
         // 按钮显示
         $button = 0;
@@ -855,33 +855,32 @@ class StyleController extends Controller {
         $tokenModel = new \app\components\Token();
         // 获取JS签名
         $jsarr = $tokenModel->getSignature();
-        
+
         if ($user_id = $session->get('user_id')) {
             $user = \frontend\models\User::findOne($user_id);
-            
+
             $model = new \common\models\ZyProject();
             $project = $model->findOne(['user_id' => $user_id]);
-            
+
             $orderM = new \frontend\models\Order();
             $order = $orderM->getOrdersByUserId($user_id);
-            
+
             //如果有需求没有订单
-            if ($project &&!$order) {
+            if ($project && !$order) {
                 //如果有需求跳到匹配设计师
                 $button = 1;
-            }elseif($project && $order){
+            } elseif ($project && $order) {
                 //两个都有
                 $button = 2;
-            }else{
+            } else {
                 //没有需求也没有订单
                 $button = 3;
             }
-            
+            return $this->render('reportb', ['user' => $user, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
         } else {
             $ukname = Yii::$app->request->get('ukname');
-            return $this->render('reportb', ['ukname' => $ukname,'button'=>$button,'jsarr' => $jsarr,'get_str'=>$data]);
+            return $this->render('reportb', ['ukname' => $ukname, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
         }
-        return $this->render('reportb', ['user' => $user,'button'=>$button,'jsarr' => $jsarr,'get_str'=>$data]);
     }
 
 }

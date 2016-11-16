@@ -23,7 +23,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
         <script type="text/javascript" src="js/touch-0.2.14.min.js" ></script>
         <script type="text/javascript" src="js/gloab.js" ></script>
 <!--        <script type="text/javascript" src="js/jquery.easy-pie-chart.js" ></script>-->
-       <script type="text/javascript" src="js/jquery.circliful.min.js" ></script>
+        <script type="text/javascript" src="js/jquery.circliful.min.js" ></script>
         <script type="text/javascript" src="js/style_report.js" ></script>
         <script>
             $(function () {
@@ -50,27 +50,31 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     <li>   <?php if ($session->get('user_id')) { ?>
                             <a abc="<?php echo Url::toRoute('/user/loginout'); ?>">暂时登出</a>
 
-<?php } else { ?>
+                        <?php } else { ?>
 
                             <a href = "<?php echo Url::toRoute('/user/login'); ?>">立即登录</a>
 
-<?php }; ?>
+                        <?php }; ?>
 
                     </li>
                 </ul>
             </section>
             <?php
             $username = '';
-            if (isset($ukname)&&!empty($ukname)) {
+            if (isset($ukname) && !empty($ukname)) {
                 $username = $ukname;
             } else {
-                if (isset($user['nickname']) && !empty($user['nickname'])) {
-                    $username = $user['nickname'];
-                    $username = $uc->userTextDecode($username);
-                } else {
-                    $username = $user['phone'];
+                if (isset($user) && !empty($user)) {
+                    if (isset($user['nickname']) && !empty($user['nickname'])) {
+                        $username = $user['nickname'];
+                        $username = $uc->userTextDecode($username);
+                    } else {
+                        $username = $user['phone'];
 
-                    $username = substr_replace($username, '****', 3, 4);
+                        $username = substr_replace($username, '****', 3, 4);
+                    }
+                }else{
+                    $username = ' 游客';
                 }
             }
             ?>
@@ -79,10 +83,10 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             <span class="report_center">你的风格</span>
             <div class="ratio_box">
                 <div class="chart">
-                   <div id="myStat2" class="gett" data-dimension="300" data-text="35%"  data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
+                    <div id="myStat2" class="gett" data-dimension="300" data-text="35%"  data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
                 </div>
                 <div class="chart">
-                   <div id="myStat2" class="gett" data-dimension="300" data-text="35%"  data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
+                    <div id="myStat2" class="gett" data-dimension="300" data-text="35%"  data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
                 </div>
                 <div class="chart">
                     <div id="myStat2" class="gett" data-dimension="300" data-text="35%"  data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
@@ -108,30 +112,30 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     </div>
                 </div>
             </div>
-<?php
-switch ($button) {
-    case 1:
-        ?>
+            <?php
+            switch ($button) {
+                case 1:
+                    ?>
                     <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=project/choose_designer'; ?>"><div class="tj_btn">匹配设计师</div></a>
 
 
-        <?php
-        break;
-        ;
-    case 2:
-        ?>
+                    <?php
+                    break;
+                    ;
+                case 2:
+                    ?>
                     <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=order/list'; ?>"><div class="tj_btn">查看订单</div></a>
 
-        <?php
-        break;
-    case 3:
-        ?>
+                    <?php
+                    break;
+                case 3:
+                    ?>
                     <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=project/match_designer'; ?>"><div class="tj_btn">找设计师</div></a>
 
-        <?php
-        break;
-}
-?>
+                    <?php
+                    break;
+            }
+            ?>
         </div>
     </body>
 </html>
@@ -163,7 +167,7 @@ switch ($button) {
                 wx.onMenuShareAppMessage({
                     title: '并向你扔了一枚牛头', // 分享标题
                     desc: '看看你对「家」的态度,如果你和我的测试结果相同,两人都将有机会得到HAY的七巧板拼盘一套。', // 分享描述
-                    link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/reportb&get_str=' + "<?= $get_str ?>" +'&ukname=' +"<?= $username ?>", // 分享链接
+                    link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/reportb&get_str=' + "<?= $get_str ?>" + '&ukname=' + "<?= $username ?>", // 分享链接
 
                     imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '<?php ?>', // 分享图标
                     type: '', // 分享类型,music、video或link，不填默认为link
