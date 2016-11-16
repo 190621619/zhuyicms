@@ -637,7 +637,10 @@ HTML;
                     url: "http://zhuyihome.com/index.php?r=style/mystyle",
                     data: "",
                     success: function (data) {
-                        alert(data);
+                        if (data == 0) {
+                                var htmlla = '<div class="Blank_Page"><span>你还没有测试风格<br />快来测试吧<a href="<?php echo Url::toRoute('/style/test'); ?>" class="red">风格测试</a></span></div>'
+                                $(".new_report").html(htmlla);
+                            }else{
                         var tmm='<div class="report_box">'
            +'<div class="ratio_box"><div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div>'
                  +'<div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div>'
@@ -654,6 +657,7 @@ HTML;
                          $(".bxslidera").height(heightttt);
                          report++;
                          
+                    }
                     }
                 })
                 }

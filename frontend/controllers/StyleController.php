@@ -847,6 +847,10 @@ class StyleController extends Controller {
         if (!$session->isActive) {
             $session->open();
         }
+        // 分享JS接口
+        $tokenModel = new \app\components\Token();
+        // 获取JS签名
+        $jsarr = $tokenModel->getSignature();
         if ($user_id = $session->get('user_id')) {
             $user = \frontend\models\User::findOne($user_id);
             //$user = $userModel->findOne($userId);
