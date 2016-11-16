@@ -843,6 +843,8 @@ class StyleController extends Controller {
     }
 
     public function actionReportb() {
+        
+        $button = 0;
         $session = Yii::$app->session;
         if (!$session->isActive) {
             $session->open();
@@ -853,13 +855,29 @@ class StyleController extends Controller {
         $jsarr = $tokenModel->getSignature();
         if ($user_id = $session->get('user_id')) {
             $user = \frontend\models\User::findOne($user_id);
-            //$user = $userModel->findOne($userId);
+            
+            $model = new \common\models\ZyProject();
+            $project = $model->findOne(['user_id' => $user_id]);
+            
+            $orderM = new \frontend\models\Order();
+            $order = $orderM->getOrdersByUserId($userId);
+            
+            //如果有需求没有订单
+            if ($project &&!$order) {
+                //如果有需求跳到匹配设计师
+                $button = 1;
+            }elseif($project && $order){
+                //两个都有
+                $button = 2;
+            }else{
+                //没有需求也没有订单
+                $button = 3;
+            }
+            
         } else {
-            return $this->redirect(['user/login']);
+            return $this->render('reportb', ['user' => $user]);
         }
-
-
-        return $this->render('reportb', ['user' => $user]);
+        return $this->render('reportb', ['user' => $user,'button'=>$button]);
     }
 
 }

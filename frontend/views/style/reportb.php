@@ -106,8 +106,29 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     </div>
                 </div>
             </div>
+            <?php
+            switch ($button){
+                case 1:
+                    ?>
+            <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=project/choose_designer'; ?>"><div class="tj_btn">匹配设计师</div></a>
+            
 
-            <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=style/test'; ?>"><div class="tj_btn">重新测试</div></a>
+            <?php
+                    break;;
+                case 2:
+            ?>
+             <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=order/list'; ?>"><div class="tj_btn">查看订单</div></a>
+
+            <?php
+            break;
+            case 3:
+            ?>
+            <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=project/match_designer'; ?>"><div class="tj_btn">找设计师</div></a>
+
+            <?php
+           break;
+            }
+            ?>
         </div>
     </body>
 </html>
