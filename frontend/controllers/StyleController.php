@@ -848,7 +848,7 @@ class StyleController extends Controller {
             $session->open();
         }
         if ($user_id = $session->get('user_id')) {
-            $user = \frontend\models\User::findOne($userId);
+            $user = \frontend\models\User::findOne($user_id);
             //$user = $userModel->findOne($userId);
         } else {
             return $this->redirect(['user/login']);
