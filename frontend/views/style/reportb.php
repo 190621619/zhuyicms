@@ -59,7 +59,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             </section>
             <?php
             $username = '';
-            if ($ukname) {
+            if (isset($ukname)&&!empty($ukname)) {
                 $username = $ukname;
             } else {
                 if (isset($user['nickname']) && !empty($user['nickname'])) {
