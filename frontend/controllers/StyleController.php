@@ -833,7 +833,7 @@ class StyleController extends Controller {
             // 查询风格
             $styleModel = new \common\models\ZyStyle();
             $res = $styleModel->findOne(['user_id'=>$user_id])->orderBy('create_time DESC');
-            return $res->style_json;
+            return 1;
         }
     }
 
