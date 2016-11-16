@@ -107,7 +107,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 </div>
             </div>
 
-            <a href="demand_problem.html"><div class="tj_btn">提交需求</div></a>
+            <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=style/test'; ?>"><div class="tj_btn">重新测试</div></a>
         </div>
     </body>
 </html>
