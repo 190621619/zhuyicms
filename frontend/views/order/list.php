@@ -635,7 +635,7 @@ HTML;
                     $.ajax({
                     type: "GET",
                     url: "",
-                    data: "<?php echo Yii::getAlias('@web') . '/index.php?r=style/mystyle'; ?>",
+                    data: "http://zhuyihome.com/index.php?r=style/mystyle",
                     success: function (data) {
                         alert(data);
                         var tmm='<div class="report_box">'
