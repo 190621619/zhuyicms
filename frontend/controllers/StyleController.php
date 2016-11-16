@@ -860,7 +860,7 @@ class StyleController extends Controller {
             $project = $model->findOne(['user_id' => $user_id]);
             
             $orderM = new \frontend\models\Order();
-            $order = $orderM->getOrdersByUserId($userId);
+            $order = $orderM->getOrdersByUserId($user_id);
             
             //如果有需求没有订单
             if ($project &&!$order) {
