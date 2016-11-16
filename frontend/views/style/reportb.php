@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Url;
-$uc = new util\Guolu();
+$uc = new common\util\Guolu();
 
 $session = Yii::$app->session;
 if (!$session->isActive) {
