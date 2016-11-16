@@ -844,6 +844,8 @@ class StyleController extends Controller {
 
     public function actionReportb() {
         
+        $data = Yii::$app->request->get('get_str');
+        // 按钮显示
         $button = 0;
         $session = Yii::$app->session;
         if (!$session->isActive) {
@@ -853,6 +855,7 @@ class StyleController extends Controller {
         $tokenModel = new \app\components\Token();
         // 获取JS签名
         $jsarr = $tokenModel->getSignature();
+        
         if ($user_id = $session->get('user_id')) {
             $user = \frontend\models\User::findOne($user_id);
             
@@ -875,9 +878,10 @@ class StyleController extends Controller {
             }
             
         } else {
-            return $this->render('reportb', ['user' => $user]);
+            $ukname = Yii::$app->request->get('ukname');
+            return $this->render('reportb', ['ukname' => $ukname]);
         }
-        return $this->render('reportb', ['user' => $user,'button'=>$button]);
+        return $this->render('reportb', ['user' => $user,'button'=>$button,'jsarr' => $jsarr,'get_str'=>$data]);
     }
 
 }

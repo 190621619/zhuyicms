@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+
 $uc = new common\util\Guolu();
 
 $session = Yii::$app->session;
@@ -24,11 +25,11 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
         <script type="text/javascript" src="js/jquery.easy-pie-chart.js" ></script>
         <script type="text/javascript" src="js/style_report.js" ></script>
         <script>
-        $(function () {
-    var get_url = getUrlParam("get_str");
-    gethahah(get_url);
-   
-})
+            $(function () {
+                var get_url = getUrlParam("get_str");
+                gethahah(get_url);
+
+            })
         </script>
     </head>
     <body>
@@ -47,30 +48,32 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     <li>   <?php if ($session->get('user_id')) { ?>
                             <a abc="<?php echo Url::toRoute('/user/loginout'); ?>">暂时登出</a>
 
-                        <?php } else { ?>
+<?php } else { ?>
 
                             <a href = "<?php echo Url::toRoute('/user/login'); ?>">立即登录</a>
 
-                        <?php }; ?>
+<?php }; ?>
 
                     </li>
                 </ul>
             </section>
-            <?php 
+            <?php
             $username = '';
-            if (isset($user['nickname']) && !empty($user['nickname'])) {
-                $username = $user['nickname'];
-                $username =  $uc->userTextDecode($username);
-              
-                
+            if ($ukname) {
+                $username = $ukname;
             } else {
-                $username = $user['phone'];
+                if (isset($user['nickname']) && !empty($user['nickname'])) {
+                    $username = $user['nickname'];
+                    $username = $uc->userTextDecode($username);
+                } else {
+                    $username = $user['phone'];
 
-                $username = substr_replace($username, '****', 3, 4);
+                    $username = substr_replace($username, '****', 3, 4);
+                }
             }
             ?>
             <div class="down_right_zd"></div> 
-            <span class="report_center center_name">Hi <?=$username ?></span>
+            <span class="report_center center_name">Hi <?= $username ?></span>
             <span class="report_center">你的风格</span>
             <div class="ratio_box">
                 <div class="chart">
@@ -106,29 +109,96 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     </div>
                 </div>
             </div>
-            <?php
-            switch ($button){
-                case 1:
-                    ?>
-            <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=project/choose_designer'; ?>"><div class="tj_btn">匹配设计师</div></a>
-            
+<?php
+switch ($button) {
+    case 1:
+        ?>
+                    <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=project/choose_designer'; ?>"><div class="tj_btn">匹配设计师</div></a>
 
-            <?php
-                    break;;
-                case 2:
-            ?>
-             <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=order/list'; ?>"><div class="tj_btn">查看订单</div></a>
 
-            <?php
-            break;
-            case 3:
-            ?>
-            <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=project/match_designer'; ?>"><div class="tj_btn">找设计师</div></a>
+        <?php
+        break;
+        ;
+    case 2:
+        ?>
+                    <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=order/list'; ?>"><div class="tj_btn">查看订单</div></a>
 
-            <?php
-           break;
-            }
-            ?>
+        <?php
+        break;
+    case 3:
+        ?>
+                    <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=project/match_designer'; ?>"><div class="tj_btn">找设计师</div></a>
+
+        <?php
+        break;
+}
+?>
         </div>
     </body>
 </html>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script type="text/javascript">
+
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: 'wx8f50ac309b04acf8', // 必填，公众号的唯一标识
+                timestamp: <?= $jsarr['timestamp'] ?>, // 必填，生成签名的时间戳
+                nonceStr: 'zhuyi', // 必填，生成签名的随机串
+                signature: "<?= $jsarr['signature'] ?>", // 必填，签名，见附录1
+                jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'checkJsApi', 'chooseImage', 'uploadImage', 'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+            //定义images用来保存选择的本地图片ID，和上传后的服务器图片ID
+
+            wx.ready(function () {
+
+                wx.checkJsApi({
+                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'checkJsApi', 'chooseImage', 'uploadImage', 'downloadImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                    success: function (res) {
+                        // 以键值对的形式返回，可用的api值true，不可用为false
+                        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                    }
+                });
+
+                //分享给朋友
+                wx.onMenuShareAppMessage({
+                    title: '并向你扔了一枚牛头', // 分享标题
+                    desc: '看看你对「家」的态度,如果你和我的测试结果相同,两人都将有机会得到HAY的七巧板拼盘一套。', // 分享描述
+                    link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/reportb&get_str=' + "<?= $get_str ?>" +'&ukname=' +"<?= $username ?>", // 分享链接
+
+                    imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '<?= $sharelogo ?>', // 分享图标
+                    type: '', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                        // alert('分享成功！再次点开你分享的链接可查看你朋友的结果。');tj_ajax(6,6037,"","","分享次数");
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    },
+                    fail: function (res) {
+                        alert(JSON.stringify(res));
+                    }
+                });
+
+                //分享到朋友圈
+                wx.onMenuShareTimeline({
+                    title: '居风格是什么', // 分享标题
+                    link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/report&link_id=' + "<?= $link_id ?>", // 分享链接
+
+                    imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '<?= $sharelogo ?>', // 分享图标
+
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                        // alert('分享成功！再次点开你分享的链接可查看你朋友的结果。');tj_ajax(6,6036,"","","分享次数");
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    },
+                    fail: function (res) {
+                        alert(JSON.stringify(res));
+                    }
+                });
+
+            });
+</script>
