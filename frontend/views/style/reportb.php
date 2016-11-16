@@ -29,7 +29,6 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             $(function () {
                 var get_url = getUrlParam("get_str");
                 gethahah(get_url);
-                $('.gett').circliful();
 
             });
         </script>
@@ -83,13 +82,13 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             <span class="report_center">你的风格</span>
             <div class="ratio_box">
                 <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="100" data-text="35%"  data-width="10" data-fontsize="20" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
+                    <div id="myStat2" class="gett" data-dimension="90" data-text="25%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
                 </div>
                 <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="100" data-text="35%"  data-width="10" data-fontsize="20" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
+                    <div id="myStat2" class="gett" data-dimension="90" data-text="35%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
                 </div>
                 <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="100" data-text="35%"  data-width="10" data-fontsize="20" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
+                    <div id="myStat2" class="gett" data-dimension="90" data-text="35%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
                 </div>
             </div>
             <div class="report_big">

@@ -28,9 +28,10 @@ function gethahah(url_data) {
     };
     $(".chart").each(function (index, tree) {
         var numberr = parseInt(new_data[index][1] / number * 100);
-        $(this).find(".percentage-light").attr("data-percent", numberr).html(numberr);
-        $(this).find(".label a").html(report[index][0]);
+        $(this).find(".gett").attr({"data-percent":numberr,"data-text":numberr+'%',"data-info":report[index][0]});
     });
+    
+    $('.gett').circliful();
 
 //    $('.percentage-light').easyPieChart({
 //        barColor: '#ff4e38',
