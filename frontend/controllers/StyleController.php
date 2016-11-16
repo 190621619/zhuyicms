@@ -823,6 +823,19 @@ class StyleController extends Controller {
             //return $this->redirect(['user/login']);
         }
     }
+    
+    public function actionMystyle(){
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        if ($user_id = $session->get('user_id')) {
+            // 查询风格
+            $styleModel = new \common\models\ZyStyle();
+            $res = $styleModel->findOne(['user_id'=>$user_id])->orderBy('create_time DESC');
+            return $res->style_json;
+        }
+    }
 
     public function actionReportb() {
 

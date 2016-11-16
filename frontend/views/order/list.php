@@ -635,10 +635,10 @@ HTML;
                     $.ajax({
                     type: "GET",
                     url: "",
-                    data: "",
+                    data: "<?php echo Yii::getAlias('@web') . '/index.php?r=style/mystyle'; ?>",
                     success: function (data) {
+                        alert(data);
                         var tmm='<div class="report_box">'
-            +'<span class="report_center center_name">Hi KIVEN</span><span class="report_center">你的风格</span>'
            +'<div class="ratio_box"><div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div>'
                  +'<div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div>'
                 +'<div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div></div>'
@@ -646,9 +646,9 @@ HTML;
                +'<div class="report_here"  id="maodianc"><span class="re_here_title"></span><img src="img/home_page/1.jpg" /><div class="report_mesg"></div></div>'
                 +'<div class="report_here"  id="maodianc"><span class="re_here_title"></span><img src="img/home_page/1.jpg" /><div class="report_mesg"></div></div>'
                 +'<div class="report_here"  id="maodianc"><span class="re_here_title"></span><img src="img/home_page/1.jpg" /><div class="report_mesg"></div></div>'
-            +'</div><a href="demand_problem.html"><div class="tj_btn">提交需求</div></a></div>'
+            +'</div><a href="<?php echo Yii::getAlias('@web') . '/index.php?r=style/test'; ?>"><div class="tj_btn">重新测试</div></a></div>'
                         $(".new_report").html(tmm);
-                        data="8,20$1,10$10,5$";
+                        //data="8,20$1,10$10,5$";
                         gethahah(data);
                         var heightttt = $(".bxslidera li:eq(" + indexaa + ")").height();
                          $(".bxslidera").height(heightttt);

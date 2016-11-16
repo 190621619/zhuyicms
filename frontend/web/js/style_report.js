@@ -1,13 +1,11 @@
 
 
- function gethahah(url_data){
-     console.log(url_data)
+function gethahah(url_data) {
     var size = parseInt(parseInt($("html").css("font-size")) * 1.2);
     var widtht = parseInt($("html").css("font-size")) * .08;
-    
+
 //    var data_a = ["", "现代简约", "工业风格", "波西米亚风格", "中式风格", "日式风格", "Art Deco", "北欧风格", "中古风格", "美式风格", "法式古典风格"];
     url_data = url_data.split("$");
-    console.log(url_data);
     var new_data = [];
     var report = [
         ["现代简约", "img/home_page/1.jpg", "这是现代简约的描述"],
@@ -27,10 +25,7 @@
 //            new_data[i][0]=data_a[parseInt(new_data[i][0])];
         number += parseInt(new_data[i][1]);
 
-    }
-    ;
-    console.log(new_data);
-    console.log(number);
+    };
     $(".chart").each(function (index, tree) {
         var numberr = parseInt(new_data[index][1] / number * 100);
         $(this).find(".percentage-light").attr("data-percent", numberr).html(numberr);
@@ -53,7 +48,7 @@
         $(this).find(">img").attr("src", report[index][1]);
         $(this).find(".report_mesg").html(report[index][2]);
     });
-    }
+}
 
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
