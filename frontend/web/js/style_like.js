@@ -13,7 +13,8 @@ $(function () {
     }
     console.log(new_json);
     var click_touch = true;
-    var foin_hrm='<div class="like_foin">< img src="img/style_test/top_right.png" /></div>'; touch.on(".like_here", "tap", function (ev) {
+    var foin_hrm="<div class='like_foin'>< img src='img/style_test/top_right.png' /></div>";
+    touch.on(".like_here", "tap", function (ev) {
         var _this = $(ev.currentTarget);
         if (click_touch) {
             click_touch = false;
