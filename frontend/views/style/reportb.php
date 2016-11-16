@@ -22,14 +22,16 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
         <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
         <script type="text/javascript" src="js/touch-0.2.14.min.js" ></script>
         <script type="text/javascript" src="js/gloab.js" ></script>
-        <script type="text/javascript" src="js/jquery.easy-pie-chart.js" ></script>
+<!--        <script type="text/javascript" src="js/jquery.easy-pie-chart.js" ></script>-->
+       <script type="text/javascript" src="js/jquery.circliful.min.js" ></script>
         <script type="text/javascript" src="js/style_report.js" ></script>
         <script>
             $(function () {
                 var get_url = getUrlParam("get_str");
                 gethahah(get_url);
+                $('.gett').circliful();
 
-            })
+            });
         </script>
     </head>
     <body>
@@ -77,16 +79,13 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             <span class="report_center">你的风格</span>
             <div class="ratio_box">
                 <div class="chart">
-                    <div class="percentage-light" data-percent="45"><span>45</span>%</div>
-                    <div class="label"><a href="#maodiana"></a></div>
+                   <div id="myStat2" class="gett" data-dimension="300" data-text="35%"  data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
                 </div>
                 <div class="chart">
-                    <div class="percentage-light" data-percent="35"><span>35</span>%</div>
-                    <div class="label"><a href="#maodianb"></a></div>
+                   <div id="myStat2" class="gett" data-dimension="300" data-text="35%"  data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
                 </div>
                 <div class="chart">
-                    <div class="percentage-light" data-percent="20"><span>20</span>%</div>
-                    <div class="label"><a href="#maodianc"></a></div>
+                    <div id="myStat2" class="gett" data-dimension="300" data-text="35%"  data-width="30" data-fontsize="38" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee"></div>
                 </div>
             </div>
             <div class="report_big">

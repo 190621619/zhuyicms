@@ -17,7 +17,26 @@
 .report_here { float: left; width: 100%; clear: both; position: relative;}
 .tj_btn { width: 84%; float: left; clear: both; margin:.8rem 8%; height: .88rem; background: #FF4E38; color: #FFFFFF; font-size: .28rem; text-align: center; line-height: .88rem;}
 
+.circliful {
+    position: relative; 
+}
 
+.circle-text, .circle-info, .circle-text-half, .circle-info-half {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+}
+
+.circle-info, .circle-info-half {
+	color: #999;
+}
+
+.circliful .fa {
+	margin: -10px 3px 0 3px;
+	position: relative;
+	bottom: 4px;
+}
 
 
 

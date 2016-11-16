@@ -879,7 +879,7 @@ class StyleController extends Controller {
             
         } else {
             $ukname = Yii::$app->request->get('ukname');
-            return $this->render('reportb', ['ukname' => $ukname]);
+            return $this->render('reportb', ['ukname' => $ukname,'button'=>$button,'jsarr' => $jsarr,'get_str'=>$data]);
         }
         return $this->render('reportb', ['user' => $user,'button'=>$button,'jsarr' => $jsarr,'get_str'=>$data]);
     }
