@@ -59,6 +59,7 @@ $(function () {
         }
     });
     touch.on(".btnnnn", "tap", function () {
+        if($(".btnnnn").hasClass("active")){
         var url_str = "";
         new_json.sort(sortBy('number', false, parseInt));
         new_json = new_json.slice(0, 3);
@@ -77,6 +78,7 @@ $(function () {
                 }
             }
         });
+        }
     });
 //	$(".like_here").on("click",function(ev){
 //		var _this=$(ev.currentTarget);
