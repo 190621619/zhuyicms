@@ -69,12 +69,12 @@ var cicleTransform = function(num, old_num,_this) {
                             if(c_num > 50) {
                                 b_r_a.css({
                                     "transform": "rotate(45deg)",
-                                    "transition": "transform 1s linear"
+                                    "transition": "transform .5s linear"
                                 });
                                 setTimeout(function() {
                                     b_l_a.css({
                                         "transform": "rotate(" + (((c_num-50)/100*360)-135) + "deg)",
-                                        "transition": "transform 1s linear"
+                                        "transition": "transform .5s linear"
                                     });
                                 },1000);
                             } else {
@@ -82,17 +82,17 @@ var cicleTransform = function(num, old_num,_this) {
                                     setTimeout(function() {
                                         b_r_a.css({
                                             "transform": "rotate(" + ((c_num/100*360)-135) + "deg)",
-                                            "transition": "transform 1s linear"
+                                            "transition": "transform .5s linear"
                                         });
                                     },1000);
                                     b_l_a.css({
                                         "transform": "rotate(-135deg)",
-                                        "transition": "transform 1s linear"
+                                        "transition": "transform .5s linear"
                                     });
                                 } else {
                                     b_r_a.css({
                                         "transform": "rotate(" + ((c_num/100*360)-135) + "deg)",
-                                        "transition": "transform 1s linear"
+                                        "transition": "transform .5s linear"
                                     });
                                 }
                                 
