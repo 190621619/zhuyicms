@@ -31,7 +31,6 @@ function gethahah(url_data) {
         var numberr = parseInt(new_data[index][1] / number * 100);
         var _this=$(this);
         var text=report[index][0];
-        console.log(text)
         _this.find(".tx").html(numberr+"%");
         _this.find(".title_style").html(text);
         cicleTransform(numberr,"222",_this)

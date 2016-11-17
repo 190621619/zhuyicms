@@ -21,6 +21,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
         <script type="text/javascript" src="js/touch-0.2.14.min.js" ></script>
         <script type="text/javascript"  src="js/gloab.js"></script>
         <script type="text/javascript"  src="js/style_test.js"></script>
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     </head>
     <body>
         <div class="style_text_boxs">
@@ -73,9 +74,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>你希望你的家装在风格上更接近下面哪张图片呢？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="4a7a8a9"><img src="img/problem/1-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">经典</div></div>
-                    <div class="here_div" tetel="2a6"><img src="img/problem/1-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">融合</div></div>
-                    <div class="here_div" tetel="1a3a5a10"><img src="img/problem/1-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">当代</div></div>
+                    <div class="here_div" tetel="10a9"><img src="img/problem/1-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">经典</div></div>
+                    <div class="here_div" tetel="8a6a3a4"><img src="img/problem/1-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">融合</div></div>
+                    <div class="here_div" tetel="1a2a7a5"><img src="img/problem/1-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">当代</div></div>
                 </div>
 
                 <div class="style_here" nuber="2">
@@ -86,9 +87,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>关于空间的色彩，你更心仪的会是以下哪一种呢？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="1a5a10"><img src="img/problem/2-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">素颜</div></div>
-                    <div class="here_div" tetel="2a3a4"><img src="img/problem/2-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中</div></div>
-                    <div class="here_div" tetel="6a7a8a9"><img src="img/problem/2-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">色彩缤纷</div></div>
+                    <div class="here_div" tetel="2a5"><img src="img/problem/2-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">素颜</div></div>
+                    <div class="here_div" tetel="1a9a4"><img src="img/problem/2-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中</div></div>
+                    <div class="here_div" tetel="7a8a10a3a6"><img src="img/problem/2-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">色彩缤纷</div></div>
                 </div>
 
                 <div class="style_here" nuber="3">
@@ -99,9 +100,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>从“填满”到“留白”，你的选择会是什么？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="1a2a5a7a10"><img src="img/problem/3-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">填满</div></div>
-                    <div class="here_div" tetel="3a4a6a9"><img src="img/problem/3-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中</div></div>
-                    <div class="here_div" tetel="8"><img src="img/problem/3-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">留白</div></div>
+                    <div class="here_div" tetel="8a6a10a3"><img src="img/problem/3-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">填满</div></div>
+                    <div class="here_div" tetel="2a9"><img src="img/problem/3-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中</div></div>
+                    <div class="here_div" tetel="1a7a5a4"><img src="img/problem/3-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">留白</div></div>
                 </div>
 
                 <div class="style_here" nuber="4">
@@ -112,9 +113,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>而你喜欢的表情会是以下哪种？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="7a8a4"><img src="img/problem/4-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">纯色块</div></div>
-                    <div class="here_div" tetel="9a2"><img src="img/problem/4-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">两者兼具</div></div>
-                    <div class="here_div" tetel="1a3a5a6a10"><img src="img/problem/4-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">图案</div></div>
+                    <div class="here_div" tetel="1a5a4"><img src="img/problem/4-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">纯色块</div></div>
+                    <div class="here_div" tetel="2a7a8"><img src="img/problem/4-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">两者兼具</div></div>
+                    <div class="here_div" tetel="9a6a10a3"><img src="img/problem/4-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">图案</div></div>
                 </div>
 
                 <div class="style_here" nuber="5">
@@ -125,9 +126,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>而你钟意的家具轮廓是以直线为主，还是以曲线为主？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="1a3a6"><img src="img/problem/5-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">直线</div></div>
-                    <div class="here_div" tetel="4a8a9"><img src="img/problem/5-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">柔曲线</div></div>
-                    <div class="here_div" tetel="2a5a7a10"><img src="img/problem/5-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">古典曲线</div></div>
+                    <div class="here_div" tetel="1a2a5a6a4"><img src="img/problem/5-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">直线</div></div>
+                    <div class="here_div" tetel="7a8a9a3"><img src="img/problem/5-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">柔曲线</div></div>
+                    <div class="here_div" tetel="10"><img src="img/problem/5-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">古典曲线</div></div>
                 </div>
 
                 <div class="style_here" nuber="6">
@@ -138,9 +139,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>而以下哪一种色彩搭配的空间才会入你的"法眼"呢？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="5a9a10"><img src="img/problem/6-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">同色系</div></div>
-                    <div class="here_div" tetel="2a3a6a4a8a7"><img src="img/problem/6-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中</div></div>
-                    <div class="here_div" tetel="1"><img src="img/problem/6-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">鲜明对比</div></div>
+                    <div class="here_div" tetel="1a7a5a9a4"><img src="img/problem/6-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">同色系</div></div>
+                    <div class="here_div" tetel="2a3"><img src="img/problem/6-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中</div></div>
+                    <div class="here_div" tetel="6a8a10"><img src="img/problem/6-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">鲜明对比</div></div>
                 </div>
 
                 <div class="style_here" nuber="7">
@@ -151,9 +152,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>那么，以下哪一种照明方式最接近你期待中的空间“底妆”呢？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="2a9a3a5"><img src="img/problem/7-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">直接照明</div></div>
-                    <div class="here_div" tetel="1a4a10a6"><img src="img/problem/7-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中</div></div>
-                    <div class="here_div" tetel="8a7"><img src="img/problem/7-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">间接照明</div></div>
+                    <div class="here_div" tetel="1a7a9"><img src="img/problem/7-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">直接照明</div></div>
+                    <div class="here_div" tetel="8a10a3"><img src="img/problem/7-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中</div></div>
+                    <div class="here_div" tetel="2a5a6a4"><img src="img/problem/7-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">间接照明</div></div>
                 </div>
 
                 <div class="style_here" nuber="8">
@@ -164,9 +165,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>那么，你最喜欢的材料是哪些呢？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="3a5a9"><img src="img/problem/8-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">自然（毛，木，石子）</div></div>
-                    <div class="here_div" tetel="1a2a4a7"><img src="img/problem/8-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适度加工（皮，大理石，编织物）</div></div>
-                    <div class="here_div" tetel="10a8a6"><img src="img/problem/8-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">人造合成（钢，玻璃，水泥）</div></div>
+                    <div class="here_div" tetel="5a4a3"><img src="img/problem/8-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">自然（毛，木，石子）</div></div>
+                    <div class="here_div" tetel="2a7a9a8a6a10"><img src="img/problem/8-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适度加工（皮，大理石，编织物）</div></div>
+                    <div class="here_div" tetel="1"><img src="img/problem/8-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">人造合成（钢，玻璃，水泥）</div></div>
                 </div>
 
                 <div class="style_here" nuber="9">
@@ -177,9 +178,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>在软装材料上，你会喜欢哪种手感的材质？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="8a6"><img src="img/problem/9-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">粗质（稻草编织，粗毛）</div></div>
-                    <div class="here_div" tetel="4a7a9a10"><img src="img/problem/9-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中（棉等纺织物）</div></div>
-                    <div class="here_div" tetel="1a2a3a5"><img src="img/problem/9-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">细腻（丝绸，绒毛）</div></div>
+                    <div class="here_div" tetel="2a3a7a5"><img src="img/problem/9-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">粗质（稻草编织，粗毛）</div></div>
+                    <div class="here_div" tetel="1a8a9a4"><img src="img/problem/9-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">适中（棉等纺织物）</div></div>
+                    <div class="here_div" tetel="10a6"><img src="img/problem/9-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">细腻（丝绸，绒毛）</div></div>
 
 <!--                    <div class="bot_nac"><span class="nac_a"><a href="choose_style.html">直接选择风格</a></span><span class="nac_b"><a href="#">我有商业空间</a></span></div>
                     -->
@@ -193,11 +194,76 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                              <span>在你心目中最理想的假期目的地会是哪里呢？</span>
                         </div>
                     </div>
-                    <div class="here_div" tetel="2a5a"><img src="img/problem/10-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">郊游</div></div>
-                    <div class="here_div" tetel="1a6a10"><img src="img/problem/10-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">探索都市</div></div>
-                    <div class="here_div" tetel="3a4a8a9a7"><img src="img/problem/10-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">博物馆</div></div>
+                    <div class="here_div" tetel="7a5a3"><img src="img/problem/10-1.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">郊游</div></div>
+                    <div class="here_div" tetel="1a2a8a6"><img src="img/problem/10-2.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">探索都市</div></div>
+                    <div class="here_div" tetel="4a10a9"><img src="img/problem/10-3.jpg"/><div class="here_div_bota"></div><div class="here_div_botb">博物馆</div></div>
                 </div>
             </section>
         </div>
     </body>
 </html>
+<script type="text/javascript">
+    function gongzhuang(a,b,c){
+         tj_ajax(b, c, user_id, "", "公装项目");
+         window.location.href=a;
+    }
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: 'wx8f50ac309b04acf8', // 必填，公众号的唯一标识
+        timestamp: <?= $jsarr['timestamp'] ?>, // 必填，生成签名的时间戳
+        nonceStr: 'zhuyi', // 必填，生成签名的随机串
+        signature: "<?= $jsarr['signature'] ?>", // 必填，签名，见附录1
+        jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'checkJsApi', 'chooseImage', 'uploadImage', 'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function () {
+
+        wx.checkJsApi({
+            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'checkJsApi', 'chooseImage', 'uploadImage', 'downloadImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+            success: function (res) {
+                // 以键值对的形式返回，可用的api值true，不可用为false
+                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+            }
+        });
+
+        //分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '看看你对「家」的态度.', // 分享标题
+            desc: '在某种意义上，「家」就等于你，可是你真的懂自己?1分钟完成这10道测试题，找到最适合 你的家居风格。', // 分享描述
+            link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=index/index', // 分享链接
+
+            imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '/img/zhuyilogo.jpg', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                alert('已分享!');
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '法式?工业风?中古还是波西米亚?看看你对「家」的态度.', // 分享标题
+            link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=index/index', // 分享链接
+            imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '/img/zhuyilogo.jpg', // 分享图标
+
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                alert('分享成功!');
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+
+    });
+</script>

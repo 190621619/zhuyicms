@@ -767,8 +767,12 @@ class StyleController extends Controller {
     }
 
     public function actionTest() {
-
-        return $this->render('test');
+        // 分享JS接口
+        $tokenModel = new \app\components\Token();
+        // 获取JS签名
+        $jsarr = $tokenModel->getSignature();
+        
+        return $this->render('test',['jsarr' => $jsarr]);
     }
 
     public function actionLike() {
