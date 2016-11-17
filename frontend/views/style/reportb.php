@@ -89,8 +89,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                             <div class="bar-right-an"></div>
                         </div>
                         <div class="tx">0%</div>
-                        <div class="title_style">中式风格</div>
                     </div>
+                                            <div class="title_style">中式风格</div>
+
                 </div>
                 <div class="chart">
                     <div class="cicle">
@@ -101,8 +102,8 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                             <div class="bar-right-an"></div>
                         </div>
                         <div class="tx">0%</div>
-                        <div class="title_style">中式风格</div>
                     </div>
+                    <div class="title_style">中式风格</div>
                 </div>
                 <div class="chart">
                     <div class="cicle">
@@ -113,8 +114,9 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                             <div class="bar-right-an"></div>
                         </div>
                         <div class="tx">0%</div>
-                        <div class="title_style">中式风格</div>
+                        
                     </div>
+                    <div class="title_style">中式风格</div>
                 </div>
             </div>
             <div class="report_big">

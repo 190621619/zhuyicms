@@ -35,8 +35,6 @@ function gethahah(url_data) {
         cicleTransform(numberr,"",_this)
     });
     
-    $('.gett').circliful();
-
 //    $('.percentage-light').easyPieChart({
 //        barColor: '#ff4e38',
 //        trackColor: '#eeefef',
