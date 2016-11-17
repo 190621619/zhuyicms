@@ -31,6 +31,7 @@ function gethahah(url_data) {
         var numberr = parseInt(new_data[index][1] / number * 100);
         var _this=$(this);
         var text=report[index][0];
+        console.log(text)
         _this.find(".tx").html(numberr+"%");
         _this.find(".title_style").html(text);
         cicleTransform(numberr,"",_this)
@@ -52,17 +53,10 @@ function gethahah(url_data) {
         $(this).find(">img").attr("src", report[index][1]);
         $(this).find(".report_mesg").html(report[index][2]);
     });
-}
-
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null)
-        return unescape(r[2]);
-    return null; //返回参数值
-}
-
-var cicleTransform = function(num, old_num,_this) {
+    
+    
+    
+    var cicleTransform = function(num, old_num,_this) {
                             var b_l_a = _this.find(".bar-left-an");
                             var b_r_a = _this.find(".bar-right-an");
                             var c_num = num;
@@ -98,3 +92,13 @@ var cicleTransform = function(num, old_num,_this) {
                                 
                             }
                         }
+}
+
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null)
+        return unescape(r[2]);
+    return null; //返回参数值
+}
+
