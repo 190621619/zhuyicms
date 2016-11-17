@@ -56,14 +56,12 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="like_box">
                     <?php
                     foreach ($styleArr as $v) {
-                        foreach ($v as $img) {
                             ?>
 
-                            <div class="like_here" new_str="<?= $img['style_id'] ?>">
-                                <img src="<?= $img['img_url'] ?>"  />
+                            <div class="like_here" new_str="<?= $v['style_id'] ?>">
+                                <img src="<?= $v['img_url'] ?>"  />
                             </div>
                             <?php
-                        }
                     }
                     ?>
 

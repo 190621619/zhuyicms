@@ -1,7 +1,6 @@
 $(function () {
     var new_str = getUrlParam("style");
     var new_json = [];
-    console.log(new_str);
     new_str = new_str.split("$");
     for (var i = 0; i < new_str.length - 1; i++) {
         new_str[i] = new_str[i].split(",");
@@ -11,7 +10,6 @@ $(function () {
         }
         new_json.push(arr);
     }
-    console.log(new_json);
     var click_touch = true;
     var foin_hrm="<div class='like_foin'><img src='img/style_test/top_right.png'/></div>";
     touch.on(".like_here", "tap", function (ev) {
@@ -42,9 +40,7 @@ $(function () {
                 }
             }
             click_touch = true;
-            for (var i in new_json) {
-                console.log(new_json[i]["number"]);
-            }
+            
 
         }
 
@@ -59,6 +55,7 @@ $(function () {
         }
     });
     touch.on(".btnnnn", "tap", function () {
+        if($(".btnnnn").hasClass("active")){
         var url_str = "";
         new_json.sort(sortBy('number', false, parseInt));
         new_json = new_json.slice(0, 3);
@@ -77,6 +74,7 @@ $(function () {
                 }
             }
         });
+        }
     });
 //	$(".like_here").on("click",function(ev){
 //		var _this=$(ev.currentTarget);

@@ -68,7 +68,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here active" nuber="1">
                     <div class="gloab_top">
                         <div class="top_bottom"><span class="top_bottom_title">风格</span>
-                             <span class="top_right"><i class="pro_number">1</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">1</i><i>/10</i></span>
                              <div>关于自己日日相伴的家，<br> 应该没有人会比你更清楚自己想要什么吧。那么，</div>
                              <span>你希望你的家装在风格上更接近下面哪张图片呢？</span>
                         </div>
@@ -81,7 +81,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="2">
                    <div class="gloab_top">
                         <div class="top_bottom"><span class="top_bottom_title">色彩多少</span>
-                             <span class="top_right"><i class="pro_number">2</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">2</i><i>/10</i></span>
                              <div>不可否认，色彩帮助我们奠定了家的基调，<br>它既可以冷静地安抚我们的焦虑，<br>亦能够热情地激发我们的活力。</div>
                              <span>关于空间的色彩，你更心仪的会是以下哪一种呢？</span>
                         </div>
@@ -94,7 +94,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="3">
                     <div class="gloab_top">
                         <div class="top_bottom"><span class="top_bottom_title">空间</span>
-                             <span class="top_right"><i class="pro_number">3</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">3</i><i>/10</i></span>
                              <div>爱收藏的恋物癖？<br> 还是“断舍离”的拥趸者？<br> 你对“物”的态度决定了你的空间状态。 </div>
                              <span>从“填满”到“留白”，你的选择会是什么？</span>
                         </div>
@@ -107,7 +107,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="4">
                     <div class="gloab_top">
                         <div class="top_bottom"><span class="top_bottom_title">饰品图案</span>
-                             <span class="top_right"><i class="pro_number">4</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">4</i><i>/10</i></span>
                              <div>图纹、花样还有肌理常常是软装为家赋予的“表情"，</div>
                              <span>而你喜欢的表情会是以下哪种？</span>
                         </div>
@@ -120,7 +120,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="5">
                     <div class="gloab_top">
                         <div class="top_bottom"><span class="top_bottom_title">线条</span>
-                             <span class="top_right"><i class="pro_number">5</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">5</i><i>/10</i></span>
                              <div>家具的线条是勾勒空间的重要“笔触”，<br> 可以表现出一个家的风骨。 </div>
                              <span>而你钟意的家具轮廓是以直线为主，还是以曲线为主？</span>
                         </div>
@@ -133,7 +133,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="6">
                     <div class="gloab_top">
                          <div class="top_bottom"><span class="top_bottom_title">色彩搭配</span>
-                             <span class="top_right"><i class="pro_number">6</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">6</i><i>/10</i></span>
                              <div> 我们猜测，着装时偏好的色彩搭配，<br> 你大概也会沿用到你的家里吧。 </div>
                              <span>而以下哪一种色彩搭配的空间才会入你的"法眼"呢？</span>
                         </div>
@@ -146,7 +146,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="7">
                     <div class="gloab_top">
                          <div class="top_bottom"><span class="top_bottom_title">照明</span>
-                             <span class="top_right"><i class="pro_number">7</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">7</i><i>/10</i></span>
                              <div> 在家装过程中常会被人忽略的照明设计，<br> 却是建筑师、室内设计师们最关注的问题之一。<br> 不夸张的说，照明是空间的“底妆”。</div>
                              <span>那么，以下哪一种照明方式最接近你期待中的空间“底妆”呢？</span>
                         </div>
@@ -159,7 +159,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="8">
                     <div class="gloab_top">
                         <div class="top_bottom"><span class="top_bottom_title">主要材质</span>
-                             <span class="top_right"><i class="pro_number">8</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">8</i><i>/10</i></span>
                              <div>你无法否认，从不同材料身上，你常常可以捕捉到许多不同的情绪。<br> 材料甚至是设计师表达创作的一种语言。</div>
                              <span>那么，你最喜欢的材料是哪些呢？</span>
                         </div>
@@ -172,7 +172,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="9">
                     <div class="gloab_top">
                         <div class="top_bottom"><span class="top_bottom_title">布料</span>
-                             <span class="top_right"><i class="pro_number">9</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">9</i><i>/10</i></span>
                              <div> 家装需要“看”，更需要“摸”。</div>
                              <span>在软装材料上，你会喜欢哪种手感的材质？</span>
                         </div>
@@ -188,7 +188,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                 <div class="style_here" nuber="10">
                     <div class="gloab_top">
                         <div class="top_bottom"><span class="top_bottom_title">度假地点</span>
-                             <span class="top_right"><i class="pro_number">10</i><i>/14</i></span>
+                             <span class="top_right"><i class="pro_number">10</i><i>/10</i></span>
                              <div> 旅行改变了我们的视野。</div>
                              <span>在你心目中最理想的假期目的地会是哪里呢？</span>
                         </div>

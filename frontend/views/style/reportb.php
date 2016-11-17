@@ -23,7 +23,6 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
         <script type="text/javascript" src="js/touch-0.2.14.min.js" ></script>
         <script type="text/javascript" src="js/gloab.js" ></script>
 <!--        <script type="text/javascript" src="js/jquery.easy-pie-chart.js" ></script>-->
-        <script type="text/javascript" src="js/jquery.circliful.min.js" ></script>
         <script type="text/javascript" src="js/style_report.js" ></script>
         <script>
             $(function () {
@@ -72,7 +71,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 
                         $username = substr_replace($username, '****', 3, 4);
                     }
-                }else{
+                } else {
                     $username = ' 游客';
                 }
             }
@@ -82,14 +81,31 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             <span class="report_center">你的风格</span>
             <div class="ratio_box">
                 <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="90" data-text="25%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
+                    <div class="cicle">
+                        <div class="bar bar-left">
+                            <div class="bar-left-an"></div>
+                        </div>
+                        <div class="bar bar-right">
+                            <div class="bar-right-an"></div>
+                        </div>
+                        <div class="tx">0%</div>
+                    </div>
+                                            <div class="title_style">中式风格</div>
+
                 </div>
                 <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="90" data-text="35%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
+                    <div class="cicle">
+                        <div class="bar bar-left">
+                            <div class="bar-left-an"></div>
+                        </div>
+                        <div class="bar bar-right">
+                            <div class="bar-right-an"></div>
+                        </div>
+                        <div class="tx">0%</div>
+                    </div>
+                    <div class="title_style">中式风格</div>
                 </div>
-                <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="90" data-text="35%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
-                </div>
+                <div class="chart"><div class="cicle"><div class="bar bar-left"><div class="bar-left-an"></div></div><div class="bar bar-right"><div class="bar-right-an"></div></div><div class="tx"></div></div><div class="title_style"></div></div>
             </div>
             <div class="report_big">
                 <div class="report_here" id="maodiana">
@@ -133,6 +149,11 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 
                     <?php
                     break;
+                default :
+                    ?>
+                    <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=style/index'; ?>"><div class="tj_btn">开始我的测试</div></a>
+
+                <?php
             }
             ?>
         </div>
