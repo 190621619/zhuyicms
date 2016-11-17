@@ -801,6 +801,7 @@ class StyleController extends Controller {
                 $dataArr[] = $t;
             }
         }
+        shuffle($dataArr);
         echo "<pre>";
         print_r($dataArr);
         exit;
