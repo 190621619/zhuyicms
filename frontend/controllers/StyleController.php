@@ -71,8 +71,9 @@ class StyleController extends Controller {
             }
         }
     }
+
     // ajax 保存用户数据
-    public function actionAjaxuser(){
+    public function actionAjaxuser() {
         $session = Yii::$app->session;
         if (!$session->isActive) {
             $session->open();
@@ -80,28 +81,29 @@ class StyleController extends Controller {
         $userinfo = $session->get('userInfo');
         $lianxifs = \Yii::$app->request->get('lianxifs');
         $uc = new \common\util\Guolu();
-        if($lianxifs){
+        if ($lianxifs) {
             //插入数据库
             $shareUserModel = new \common\models\ZyShareUser();
             $shareUserModel->open_id = $userinfo['openid'];
             $shareUserModel->nick_name = $uc->userTextEncode($userinfo['nickname']);
             $shareUserModel->city = $userinfo['city'];
             $shareUserModel->information = $lianxifs;
-            $shareUserModel->create_time = (string)time();
+            $shareUserModel->create_time = (string) time();
             $res = $shareUserModel->save();
-            if ($res){
+            if ($res) {
                 return 1;
-            }else{
+            } else {
                 return 0;
             }
-        }else{
+        } else {
             return 0;
         }
     }
-    public function actionChannel(){
+
+    public function actionChannel() {
         $_mId = 7;
         $_mdId = Yii::$app->request->get('c_num');
-        
+
         //检验主分类
         $_mainTypeId = $_mId;
         if (empty($_mainTypeId)) {
@@ -132,7 +134,7 @@ class StyleController extends Controller {
         $model->create_time = strval(time());
         $model->main_num = 1;
         $res = $model->save();
-        
+
         if ($res) {
             $this->redirect(['style/index']);
         } else {
@@ -261,10 +263,10 @@ class StyleController extends Controller {
                             $shareModel->link_id = $this->getRandomString();
 
                             $shareModel->save();
-                            
+
                             // 重新查询自己的风格
                             $res = $shareModel->findOne(['link_id' => $shareModel->link_id]);
-                            
+
                             if (isset($problemData) && !empty($problemData)) {
                                 $pipeidu = 1;
                             } else {
@@ -755,28 +757,134 @@ class StyleController extends Controller {
 
         return curl_exec($con);
     }
-    
-    public function actionTest1(){
+
+    public function actionTest1() {
         $shareModel = new \common\models\ZyShare();
-        $res = $shareModel->findOne(['open_id'=>'o_hVBwcUqgPNwjB8iEW_QQ-CIgY4']);
+        $res = $shareModel->findOne(['open_id' => 'o_hVBwcUqgPNwjB8iEW_QQ-CIgY4']);
         $uc = new \common\util\Guolu();
         $str = $uc->userTextDecode($res['user_name']);
         echo $str;
     }
-    
-    public function actionTest(){
-        
+
+    public function actionTest() {
+
         return $this->render('test');
     }
-    
-    public function actionLike(){
+
+    public function actionLike() {
         $style_json = $link_id = Yii::$app->request->get('style');
-        $styleArr = json_encode($style_json,TRUE);
-        
+        // $styleArr = json_encode($style_json,TRUE);
+        $styleArr = explode('$', $style_json);
+        $styleArr = array_filter($styleArr);
+//         echo "<pre>";
+//        print_r($styleArr);exit;
+        $styleIDarr = array();
         //调取风格的图片
-        
-        
-        return $this->render('like');
+        foreach ($styleArr as $v) {
+            $varr = explode(',', $v);
+            //$styleIDarr[] = $varr['1'];
+            $res = \common\util\StyleExt::getRndStyleImage($varr['1']);
+
+            $stya = array();
+
+            for ($i = 0; $i < count($res); $i++) {
+                $stya[$i]['img_url'] = $res[$i]['img_url'];
+                $stya[$i]['style_id'] = $varr['1'];
+            }
+
+            $styleIDarr[] = $stya;
+        }
+
+//        echo "<pre>";
+//        print_r($styleIDarr);
+//        exit;
+
+        return $this->render('like', ['styleArr' => $styleIDarr]);
+    }
+
+    public function actionAdd() {
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+
+        if ($user_id = $session->get('user_id')) {
+            $data = Yii::$app->request->get('style_report');
+            $styleModel = new \common\models\ZyStyle();
+            $styleModel->user_id = $user_id;
+            $styleModel->style_json = (string) $data;
+            $styleModel->create_time = date('Y-m-d H:i:s');
+            $res = $styleModel->save();
+            if ($res) {
+                return 1;
+            }
+        } else {
+            return 0;
+            //return $this->redirect(['user/login']);
+        }
+    }
+
+    public function actionMystyle() {
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        if ($user_id = $session->get('user_id')) {
+            // 查询风格
+            $styleModel = new \common\models\ZyStyle();
+            $res = $styleModel->find()->where(['user_id' => 2])->orderBy('create_time DESC')->limit(1)->all();
+            if ($res) {
+                return $res[0]['style_json'];
+            } else {
+                return 0;
+            }
+        }
+        return 0;
+    }
+
+    public function actionReportb() {
+
+        $data = Yii::$app->request->get('get_str');
+        // 按钮显示
+        $button = 0;
+        $session = Yii::$app->session;
+        if (!$session->isActive) {
+            $session->open();
+        }
+        // 分享JS接口
+        $tokenModel = new \app\components\Token();
+        // 获取JS签名
+        $jsarr = $tokenModel->getSignature();
+
+        if ($user_id = $session->get('user_id')) {
+            $user = \frontend\models\User::findOne($user_id);
+
+            $model = new \common\models\ZyProject();
+            $project = $model->findOne(['user_id' => $user_id]);
+
+            $orderM = new \frontend\models\Order();
+            $order = $orderM->getOrdersByUserId($user_id);
+
+            //如果有需求没有订单
+            if ($project && !$order) {
+                //如果有需求跳到匹配设计师
+                $button = 1;
+            } elseif ($project && $order) {
+                //两个都有
+                $button = 2;
+            } else {
+                //没有需求也没有订单
+                $button = 3;
+            }
+            // 判断是否是分享的
+            if ($isshare = Yii::$app->request->get('isshare')) {
+                return $this->render('reportb', ['ukname' => $ukname, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
+            }
+            return $this->render('reportb', ['user' => $user, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
+        } else {
+            $ukname = Yii::$app->request->get('ukname');
+            return $this->render('reportb', ['ukname' => $ukname, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
+        }
     }
 
 }

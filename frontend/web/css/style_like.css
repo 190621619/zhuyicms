@@ -1,0 +1,24 @@
+.like_box { font-size: .24rem; color: #333333;}
+.like_title { position: relative; float: left; width: 100%; background: #FFFFFF; text-align: center; font-weight: 600; font-size: .28rem; padding-top: .5rem; padding-bottom: .1rem}
+.like_title::before,.like_title::after { content: ""; width: .3rem; position: absolute; height: 1px; background: #b2b2b2;  left: 4%; top: .64rem;}
+.like_title::after { left: inherit; right: 4%;}
+.like_box {overflow: hidden;position: relative; padding-bottom: .8rem;
+    top: 0.73rem;}
+.like_box .like_here { width: 28%; float: left; position: relative; margin-left: 4%; margin-bottom: 4%;}
+.like_box .like_here>img { width: 100%; float: left;}
+.like_foin { position: absolute; width: 100%; text-align: center; height: 100%; left: 0; top: 0;}
+.foinnn>img { border: 2px solid #FF4E38; box-sizing: border-box;}
+.like_foin>img {width: .5rem; position: absolute; top: 0; right: 0;z-index: 10; }
+.icon-zhengque:before { position: absolute; height: .6rem; z-index: 10; top: 0; left: 0; bottom: 0; right: 0; margin: auto;}
+.like_bottom { position: fixed; padding: .3rem 0; z-index: 999; width: 100%; left: 0; right: 0; background: #FFFFFF; margin: 0 auto; max-width: 500px; bottom:0; height: .88rem; text-align: center; line-height: .88rem; font-size: .26rem; color: #FFFFFF;}
+.like_bottom .btnnnn { width: 92%; left: 4%; position: absolute; height: .88rem; background: #CCCCCC;}
+.btnnnn.active { background: #FF4E38;}
+.banner_bottom { width: 100%; height: .5rem; float: left; position: relative; top: -3px; background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 100%); padding-top: .1rem; }.banner { position: fixed; top: .88rem; left: 0; right: 0; margin: 0 auto; width: 100%; max-width: 500px; z-index: 99;}
+
+
+
+
+
+
+
+

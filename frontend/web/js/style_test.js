@@ -92,19 +92,17 @@ for(index in result){
 	showbox.push(show)
 }
  	var newdata=showbox.slice(0,5);
-	var style_data=["极简","工业","北欧","折中","日式","美式","Art Deco","欧式古典","地中海/乡村","中式"];
-	var style_aaa=[];
-	for(var i=0;i<newdata.length;i++){
-			var bhu=newdata[i][1]-1;
-			var gerr=style_data[bhu];
-			newdata[i][1]=gerr;
-//			style_aaa.push(gerr);
-	}
+	
 	console.log(newdata);
-	var str=newdata.toString();  
-	console.log(str);
+	
+	var newstr="";  
+	for(var i=0;i<newdata.length;i++){
+		newdata[i]=newdata[i].toString();
+		newstr+=newdata[i]+"$";
+	} 
+	console.log(newstr);
         
-//	window.location.href='style_report.html?baseline_id='+str+'';
+	window.location.href='http://zhuyihome.com/index.php?r=style/like&style='+newstr+'';
 	
 
 }
