@@ -795,9 +795,9 @@ class StyleController extends Controller {
             $styleIDarr[] = $stya;
         }
 
-//        echo "<pre>";
-//        print_r($styleIDarr);
-//        exit;
+        echo "<pre>";
+        print_r($styleIDarr);
+        exit;
 
         return $this->render('like', ['styleArr' => $styleIDarr]);
     }
