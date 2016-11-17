@@ -845,6 +845,7 @@ class StyleController extends Controller {
     public function actionReportb() {
 
         $data = Yii::$app->request->get('get_str');
+        $ukname = Yii::$app->request->get('ukname');
         // 按钮显示
         $button = 0;
         $session = Yii::$app->session;
@@ -882,7 +883,7 @@ class StyleController extends Controller {
             }
             return $this->render('reportb', ['user' => $user, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
         } else {
-            $ukname = Yii::$app->request->get('ukname');
+            
             return $this->render('reportb', ['ukname' => $ukname, 'button' => $button, 'jsarr' => $jsarr, 'get_str' => $data]);
         }
     }
