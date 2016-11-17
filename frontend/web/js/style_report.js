@@ -21,7 +21,7 @@ function gethahah(url_data) {
         ["法式古典风格", "img/styleimg/法式.jpg", "对家的定义你着实是个古典派，所谓的古典可并非是说老派，而是迷恋欧洲中古世纪的贵族的精致生活，就像提及到洛可可并非只是来形容过分装饰的代名词，其实重点是在于形容日常的精巧。丰盈而饱满似雕塑的曲线、色彩斑斓的形式带给你更多兴奋与喜悦。"],
     ]
     var number = 0;
-    for (var i = 0; i < url_data.length; i++) {
+    for (var i = 0; i < url_data.length - 1; i++) {
         new_data.push(url_data[i].split(","));
 //            new_data[i][0]=data_a[parseInt(new_data[i][0])];
         number += parseInt(new_data[i][1]);
@@ -53,10 +53,17 @@ function gethahah(url_data) {
         $(this).find(">img").attr("src", report[index][1]);
         $(this).find(".report_mesg").html(report[index][2]);
     });
-    
-    
-    
-    var cicleTransform = function(num, old_num,_this) {
+}
+
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null)
+        return unescape(r[2]);
+    return null; //返回参数值
+}
+
+var cicleTransform = function(num, old_num,_this) {
                             var b_l_a = _this.find(".bar-left-an");
                             var b_r_a = _this.find(".bar-right-an");
                             var c_num = num;
@@ -92,13 +99,3 @@ function gethahah(url_data) {
                                 
                             }
                         }
-}
-
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null)
-        return unescape(r[2]);
-    return null; //返回参数值
-}
-
