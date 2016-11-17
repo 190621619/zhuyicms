@@ -72,7 +72,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 
                         $username = substr_replace($username, '****', 3, 4);
                     }
-                }else{
+                } else {
                     $username = ' 游客';
                 }
             }
@@ -133,6 +133,11 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 
                     <?php
                     break;
+                default :
+                    ?>
+                    <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=style/index'; ?>"><div class="tj_btn">开始我的测试</div></a>
+
+                <?php
             }
             ?>
         </div>

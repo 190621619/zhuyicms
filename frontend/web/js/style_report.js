@@ -8,16 +8,16 @@ function gethahah(url_data) {
     url_data = url_data.split("$");
     var new_data = [];
     var report = [
-        ["现代简约", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["工业风格", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["波西米亚风格", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["中式风格", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["日式风格", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["Art Deco", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["北欧风格", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["中古风格", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["美式风格", "img/home_page/1.jpg", "这是现代简约的描述"],
-        ["法式古典风格", "img/home_page/1.jpg", "这是现代简约的描述"],
+        ["现代简约", "img/styleimg/现代简约.jpg", "这是现代简约的描述"],
+        ["工业风格", "img/styleimg/工业.jpg", "这是现代简约的描述"],
+        ["波西米亚风格", "img/styleimg/波西米亚.jpg", "这是现代简约的描述"],
+        ["中式风格", "img/styleimg/中式.jpg", "这是现代简约的描述"],
+        ["日式风格", "img/styleimg/日式.jpg", "这是现代简约的描述"],
+        ["Art Deco", "img/styleimg/ArtDeco.jpg", "这是现代简约的描述"],
+        ["北欧风格", "img/styleimg/北欧.jpg", "这是现代简约的描述"],
+        ["中古风格", "img/styleimg/中古.jpg", "这是现代简约的描述"],
+        ["美式风格", "img/styleimg/美式.jpg", "这是现代简约的描述"],
+        ["法式古典风格", "img/styleimg/法式.jpg", "这是现代简约的描述"],
     ]
     var number = 0;
     for (var i = 0; i < url_data.length - 1; i++) {
