@@ -23,7 +23,6 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
         <script type="text/javascript" src="js/touch-0.2.14.min.js" ></script>
         <script type="text/javascript" src="js/gloab.js" ></script>
 <!--        <script type="text/javascript" src="js/jquery.easy-pie-chart.js" ></script>-->
-        <script type="text/javascript" src="js/jquery.circliful.min.js" ></script>
         <script type="text/javascript" src="js/style_report.js" ></script>
         <script>
             $(function () {
