@@ -642,9 +642,13 @@ HTML;
                                 $(".new_report").html(htmlla);
                             }else{
                         var tmm='<div class="report_box">'
-           +'<div class="ratio_box"><div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div>'
-                 +'<div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div>'
-                +'<div class="chart"><div class="percentage-light" data-percent="20"><span>20</span>%</div><div class="label"><a href="#maodianc"></a></div></div></div>'
+           +'<div class="ratio_box">'
+           +' <div class="chart"><div class="cicle"><div class="bar bar-left"><div class="bar-left-an"></div></div><div class="bar bar-right"><div class="bar-right-an"></div></div><div class="tx"></div></div><div class="title_style"></div></div>'
+           +'<div class="chart"><div class="cicle"><div class="bar bar-left"><div class="bar-left-an"></div></div><div class="bar bar-right"><div class="bar-right-an"></div></div><div class="tx"></div></div><div class="title_style"></div></div>'
+           +'<div class="chart"><div class="cicle"><div class="bar bar-left"><div class="bar-left-an"></div></div><div class="bar bar-right"><div class="bar-right-an"></div></div><div class="tx"></div></div><div class="title_style"></div></div>'
+           
+                   
+    +'</div>'
             +'<div class="report_big">'
                +'<div class="report_here"  id="maodianc"><span class="re_here_title"></span><img src="img/home_page/1.jpg" /><div class="report_mesg"></div></div>'
                 +'<div class="report_here"  id="maodianc"><span class="re_here_title"></span><img src="img/home_page/1.jpg" /><div class="report_mesg"></div></div>'
