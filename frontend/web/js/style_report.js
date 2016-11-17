@@ -1,6 +1,7 @@
 
 
 function gethahah(url_data) {
+    console.log(url_data);
     var size = parseInt(parseInt($("html").css("font-size")) * 1.2);
     var widtht = parseInt($("html").css("font-size")) * .08;
 
