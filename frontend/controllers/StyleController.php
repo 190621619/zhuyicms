@@ -794,9 +794,15 @@ class StyleController extends Controller {
 
             $styleIDarr[] = $stya;
         }
-
+        
+        $dataArr = array();
+        foreach ($styleIDarr as $v){
+            foreach ($v as $t){
+                $dataArr[] = $t;
+            }
+        }
         echo "<pre>";
-        print_r($styleIDarr);
+        print_r($dataArr);
         exit;
 
         return $this->render('like', ['styleArr' => $styleIDarr]);
