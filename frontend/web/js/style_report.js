@@ -34,7 +34,7 @@ function gethahah(url_data) {
         console.log(text)
         _this.find(".tx").html(numberr+"%");
         _this.find(".title_style").html(text);
-        cicleTransform(numberr,100,_this)
+        cicleTransform(numberr,"",_this)
     });
     
 //    $('.percentage-light').easyPieChart({
