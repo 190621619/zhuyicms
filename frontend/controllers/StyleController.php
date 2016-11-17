@@ -802,11 +802,7 @@ class StyleController extends Controller {
             }
         }
         shuffle($dataArr);
-        echo "<pre>";
-        print_r($dataArr);
-        exit;
-
-        return $this->render('like', ['styleArr' => $styleIDarr]);
+        return $this->render('like', ['styleArr' => $dataArr]);
     }
 
     public function actionAdd() {

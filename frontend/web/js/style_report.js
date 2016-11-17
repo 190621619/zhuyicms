@@ -28,7 +28,11 @@ function gethahah(url_data) {
     };
     $(".chart").each(function (index, tree) {
         var numberr = parseInt(new_data[index][1] / number * 100);
-        $(this).find(".gett").attr({"data-percent":numberr,"data-text":numberr+'%',"data-info":report[index][0]});
+        var _this=$(this);
+        var text=report[index][0];
+        _this.find(".tx").html(numberr+"%");
+        _this.find(".title_style").html(text);
+        cicleTransform(numberr,"",_this)
     });
     
     $('.gett').circliful();
@@ -58,3 +62,40 @@ function getUrlParam(name) {
         return unescape(r[2]);
     return null; //返回参数值
 }
+
+var cicleTransform = function(num, old_num,_this) {
+                            var b_l_a = _this.find(".bar-left-an");
+                            var b_r_a = _this.find(".bar-right-an");
+                            var c_num = num;
+                            if(c_num > 50) {
+                                b_r_a.css({
+                                    "transform": "rotate(45deg)",
+                                    "transition": "transform 1s linear"
+                                });
+                                setTimeout(function() {
+                                    b_l_a.css({
+                                        "transform": "rotate(" + (((c_num-50)/100*360)-135) + "deg)",
+                                        "transition": "transform 1s linear"
+                                    });
+                                },1000);
+                            } else {
+                                if(old_num > 50) {
+                                    setTimeout(function() {
+                                        b_r_a.css({
+                                            "transform": "rotate(" + ((c_num/100*360)-135) + "deg)",
+                                            "transition": "transform 1s linear"
+                                        });
+                                    },1000);
+                                    b_l_a.css({
+                                        "transform": "rotate(-135deg)",
+                                        "transition": "transform 1s linear"
+                                    });
+                                } else {
+                                    b_r_a.css({
+                                        "transform": "rotate(" + ((c_num/100*360)-135) + "deg)",
+                                        "transition": "transform 1s linear"
+                                    });
+                                }
+                                
+                            }
+                        }

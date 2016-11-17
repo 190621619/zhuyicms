@@ -82,13 +82,40 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             <span class="report_center">你的风格</span>
             <div class="ratio_box">
                 <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="90" data-text="25%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
+                    <div class="cicle">
+                        <div class="bar bar-left">
+                            <div class="bar-left-an"></div>
+                        </div>
+                        <div class="bar bar-right">
+                            <div class="bar-right-an"></div>
+                        </div>
+                        <div class="tx">0%</div>
+                        <div class="title_style">中式风格</div>
+                    </div>
                 </div>
                 <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="90" data-text="35%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
+                    <div class="cicle">
+                        <div class="bar bar-left">
+                            <div class="bar-left-an"></div>
+                        </div>
+                        <div class="bar bar-right">
+                            <div class="bar-right-an"></div>
+                        </div>
+                        <div class="tx">0%</div>
+                        <div class="title_style">中式风格</div>
+                    </div>
                 </div>
                 <div class="chart">
-                    <div id="myStat2" class="gett" data-dimension="90" data-text="35%"  data-width="6" data-info="" data-fontsize="20" data-percent="" data-fgcolor="#ff4e38" data-bgcolor="#eee"></div>
+                    <div class="cicle">
+                        <div class="bar bar-left">
+                            <div class="bar-left-an"></div>
+                        </div>
+                        <div class="bar bar-right">
+                            <div class="bar-right-an"></div>
+                        </div>
+                        <div class="tx">0%</div>
+                        <div class="title_style">中式风格</div>
+                    </div>
                 </div>
             </div>
             <div class="report_big">
