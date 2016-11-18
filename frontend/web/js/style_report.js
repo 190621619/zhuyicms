@@ -28,7 +28,7 @@ function gethahah(url_data) {
 
     };
     $(".chart").each(function (index, tree) {
-        var style_number=new_data[index][1];
+        var style_number=parseInt(new_data[index][0]);
         var numberr = parseInt(new_data[index][1] / number * 100);
         var _this=$(this);
         var text=report[style_number][0];
@@ -49,7 +49,7 @@ function gethahah(url_data) {
 //    });
 
     $(".report_big .report_here").each(function (index, arr) {
-         var style_number=new_data[index][1];
+         var style_number=parseInt(new_data[index][0]);
         $(this).find(".re_here_title").html(report[style_number][0]);
         $(this).find(">img").attr("src", report[style_number][1]);
         $(this).find(".report_mesg").html(report[style_number][2]);
