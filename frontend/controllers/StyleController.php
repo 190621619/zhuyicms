@@ -839,7 +839,7 @@ class StyleController extends Controller {
         if ($user_id = $session->get('user_id')) {
             // 查询风格
             $styleModel = new \common\models\ZyStyle();
-            $res = $styleModel->find()->where(['user_id' => 2])->orderBy('create_time DESC')->limit(1)->all();
+            $res = $styleModel->find()->where(['user_id' => $user_id])->orderBy('create_time DESC')->limit(1)->all();
             if ($res) {
                 return $res[0]['style_json'];
             } else {
