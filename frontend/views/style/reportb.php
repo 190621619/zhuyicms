@@ -185,11 +185,11 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 
                 //分享给朋友
                 wx.onMenuShareAppMessage({
-                    title: '并向你扔了一枚牛头', // 分享标题
-                    desc: '看看你对「家」的态度,如果你和我的测试结果相同,两人都将有机会得到HAY的七巧板拼盘一套。', // 分享描述
+                    title: '这个测试可以测出我的家装风格.', // 分享标题
+                    desc: '在某种意义上，「家」就等于你，可是你真的懂自己?1分钟完成这10道测试题，找到最适合 你的家居风格。', // 分享描述
                     link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/reportb&get_str=' + "<?= $get_str ?>" + '&ukname=' + "<?= $username ?>" + '&isshare=1', // 分享链接
 
-                    imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '<?php ?>', // 分享图标
+                    imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '/img/zhuyilogo.jpg', // 分享图标
                     type: '', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                     success: function () {
@@ -206,10 +206,10 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
 
                 //分享到朋友圈
                 wx.onMenuShareTimeline({
-                    title: '居风格是什么', // 分享标题
+                    title: '这个测试可以测出我的家装风格...1分钟10道题，看看你对「家」的态度.', // 分享标题
                     link: "<?php echo Yii::$app->params['frontDomain']; ?>" + '/index.php?r=style/report&link_id=' + "<?php ?>", // 分享链接
 
-                    imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '<?php ?>', // 分享图标
+                    imgUrl: "<?php echo Yii::$app->params['frontDomain'] ?>" + '/img/zhuyilogo.jpg', // 分享图标
 
                     success: function () {
                         // 用户确认分享后执行的回调函数

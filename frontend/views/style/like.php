@@ -50,7 +50,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
             <div class="down_right_zd"></div>
             <div class="like_box">
                 <div class="banner">
-                    <div class="like_title">你最喜欢以下哪一种风格</div>
+                    <div class="like_title">请选择以下你喜欢的图片</div>
                     <div class="banner_bottom"></div>
                 </div>
                 <div class="like_box">
