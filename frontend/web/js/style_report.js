@@ -28,9 +28,10 @@ function gethahah(url_data) {
 
     };
     $(".chart").each(function (index, tree) {
+        var style_number=new_data[index][1];
         var numberr = parseInt(new_data[index][1] / number * 100);
         var _this=$(this);
-        var text=report[index][0];
+        var text=report[style_number][0];
         _this.find(".tx").html(numberr+"%");
         _this.find(".title_style").html(text);
         cicleTransform(numberr,"222",_this)
@@ -48,9 +49,10 @@ function gethahah(url_data) {
 //    });
 
     $(".report_big .report_here").each(function (index, arr) {
-        $(this).find(".re_here_title").html(report[index][0]);
-        $(this).find(">img").attr("src", report[index][1]);
-        $(this).find(".report_mesg").html(report[index][2]);
+         var style_number=new_data[index][1];
+        $(this).find(".re_here_title").html(report[style_number][0]);
+        $(this).find(">img").attr("src", report[style_number][1]);
+        $(this).find(".report_mesg").html(report[style_number][2]);
     });
 }
 
