@@ -151,7 +151,7 @@ $_cookieSts = \common\controllers\BaseController::checkLoginCookie();
                     break;
                 default :
                     ?>
-                    <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=style/index'; ?>"><div class="tj_btn">开始我的测试</div></a>
+                    <a href="<?php echo Yii::getAlias('@web') . '/index.php?r=style/test'; ?>"><div class="tj_btn">开始我的测试</div></a>
 
                 <?php
             }
