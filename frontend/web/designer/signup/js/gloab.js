@@ -5,6 +5,7 @@ $(function(){
 			auto_height();
 			if($("#gloab").hasClass("pc")){
 			$("#banner_vedio").attr("autoplay","autoplay");
+                        $("#banner_vedio").get(0).play();
 		}
 		},10)
 		
